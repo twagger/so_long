@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 17:30:16 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/30 17:36:48 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,61 +56,60 @@ int	ft_is_line_ok(char *line, size_t size, int *first)
 	return (1);
 }
 
-int	ft_is_yet_char(const char *possibles, int c, int check)
+int	ft_is_yet_char(const char *possibles, int c, int chk)
 {
 	int	sum;
 
 	sum = 0;
 	while (*possibles)
 	{
-		if (check - c == *possibles || check - c == sum)
+		if (chk - c == *possibles || chk - c == sum)
 			return (1);
 		sum += (int)*possibles;
 		++possibles;
 	}
-	if (check - c == sum)
+	if (chk - c == sum)
 		return (1);
 	return (0);
 }
 
-void	ft_mandatory_char_check(char *line, int *check)
+void	ft_mandatory_char_check(char *line, int *chk)
 {
-	if (ft_strchr(line, 'E') - line >= 0 && !ft_is_yet_char("PC", 'E', *check))
-		*check += 'E';
-	if (ft_strchr(line, 'P') - line >= 0 && !ft_is_yet_char("EC", 'P', *check))
-		*check += 'P';
-	if (ft_strchr(line, 'C') - line >= 0 && !ft_is_yet_char("EP", 'C', *check))
-		*check += 'C';
+	if (ft_strchr(line, 'E') - line >= 0 && !ft_is_yet_char("PC", 'E', *chk))
+		*chk += 'E';
+	if (ft_strchr(line, 'P') - line >= 0 && !ft_is_yet_char("EC", 'P', *chk))
+		*chk += 'P';
+	if (ft_strchr(line, 'C') - line >= 0 && !ft_is_yet_char("EP", 'C', *chk))
+		*chk += 'C';
 }
 
 int	ft_map_controler(int fd)
 {
 	int		ret;
-	int		char_check;
-	size_t	line_size;
+	int		char_chk;
+	int		wall_chk;
+	size_t	len;
 	char	*line;
-	int		wall_check;
-
+	
 	line = NULL;
-	wall_check = 1;
-	char_check = 0;
+	wall_chk = 1;
+	char_chk = 0;
 	ret = get_next_line(fd, &line);
-	line_size = ft_strlen(line);
+	len = ft_strlen(line);
 	while (ret > 0)
 	{
-		if (!ft_is_line_ok(line, line_size, &wall_check))
+		if (!ft_is_line_ok(line, len, &wall_chk))
 		{
 			free(line);
 			return (ERROR);
 		}
-		ft_mandatory_char_check(line, &char_check);
+		ft_mandatory_char_check(line, &char_chk);
 		free(line);
 		line = NULL;
 		ret = get_next_line(fd, &line);
 	}
-	wall_check = 1;
-	if (ret == -1 || char_check != ('E' + 'P' + 'C') \
-		|| !ft_is_line_ok(line, line_size, &wall_check))
+	wall_chk = 1;
+	if (ret == -1 || char_chk != 216 || !ft_is_line_ok(line, len, &wall_chk))
 	{
 		free(line);
 		return (ERROR);
