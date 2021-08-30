@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 15:12:37 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/30 17:15:06 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	ft_is_map_valid(char *map_file)
 {
-	int 	fd;
+	int	fd;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == ERROR)
@@ -37,19 +37,21 @@ int	ft_exit_w_message(char *message, int fd, int code)
 	return (code);
 }
 
-int ft_is_ber_file(char *map_file)
+int	ft_is_ber_file(char *map_file)
 {
-	int dot_pos;
+	int	dot_pos;
 
-	dot_pos = ft_strchr_index(map_file, '.', 0);
+	dot_pos = ft_strchr_index(map_file, '.', -1);
 	if (dot_pos == ERROR)
 		return (0);
 	else
 	{	
-		if ((ft_strncmp(map_file + dot_pos, "ber", 4)) == 0)
+		if ((ft_strncmp(map_file + dot_pos, ".ber", 5)) == 0 \
+			&& (dot_pos != 0) \
+			&& (*(map_file + dot_pos - 1) != '/'))
 			return (1);
 		else
-			return (0);		
+			return (0);
 	}
 }
 
@@ -62,7 +64,5 @@ int	main(int ac, char **av)
 	if (!ft_is_map_valid(av[1]))
 		return (ft_exit_w_message("Error", 2, 1));
 	ft_putstr_fd("map ok\n", 1);
-	// read the file and load the entire map
-	// display the game
 	return (0);
 }

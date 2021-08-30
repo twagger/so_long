@@ -6,13 +6,12 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 14:39:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/30 17:13:10 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG
-# define SO_LONG
-//# include <mlx.h>
+#ifndef SO_LONG_H
+# define SO_LONG_H
 # include <stdlib.h>
 # include <stdio.h>
 # include "libft.h"
