@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 17:14:12 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/30 17:30:16 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,32 @@ int	ft_is_line_a_wall(char *line)
 	return (1);
 }
 
-int	ft_is_line_ok(char *line, size_t size)
+int	ft_is_line_ok(char *line, size_t size, int *first)
 {
 	int	i;
 
 	if (ft_strlen(line) != size)
 		return (0);
-	if (ft_is_line_a_wall(line))
-		return (2);
-	else
+	if (*first)
 	{
-		i = -1;
-		while (line[++i])
-		{
-			if (i == 0 && line[i] != WALL)
-				return (0);
-			if (ft_strchr_index(AUTHORIZED, line[i], 0) == ERROR)
-				return (0);
-		}
-		if (i < 3)
-			return (0);
-		if (line[i - 1] != WALL)
+		*first = 0;
+		if (!ft_is_line_a_wall(line))
 			return (0);
 		return (1);
 	}
+	i = -1;
+	while (line[++i])
+	{
+		if (i == 0 && line[i] != WALL)
+			return (0);
+		if (ft_strchr_index(AUTHORIZED, line[i], 0) == ERROR)
+			return (0);
+	}
+	if (i < 3)
+		return (0);
+	if (line[i - 1] != WALL)
+		return (0);
+	return (1);
 }
 
 int	ft_is_yet_char(const char *possibles, int c, int check)
@@ -87,14 +89,16 @@ int	ft_map_controler(int fd)
 	int		char_check;
 	size_t	line_size;
 	char	*line;
+	int		wall_check;
 
 	line = NULL;
+	wall_check = 1;
 	char_check = 0;
 	ret = get_next_line(fd, &line);
 	line_size = ft_strlen(line);
 	while (ret > 0)
 	{
-		if (!ft_is_line_ok(line, line_size))
+		if (!ft_is_line_ok(line, line_size, &wall_check))
 		{
 			free(line);
 			return (ERROR);
@@ -104,8 +108,13 @@ int	ft_map_controler(int fd)
 		line = NULL;
 		ret = get_next_line(fd, &line);
 	}
-	free(line);
-	if (ret == -1 || char_check != ('E' + 'P' + 'C'))
+	wall_check = 1;
+	if (ret == -1 || char_check != ('E' + 'P' + 'C') \
+		|| !ft_is_line_ok(line, line_size, &wall_check))
+	{
+		free(line);
 		return (ERROR);
+	}
+	free(line);
 	return (0);
 }
