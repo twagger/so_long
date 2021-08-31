@@ -1,5 +1,8 @@
 SRCS			= srcs/so_long.c \
-				  srcs/map_controler.c
+				  srcs/map/map_controler.c \
+				  srcs/map/map_creator.c \
+				  srcs/map/map_utils.c \
+				  srcs/commons/commons.c
 
 OBJS			= $(SRCS:.c=.o)
 
@@ -13,7 +16,7 @@ LIBDIR			= libft/
 
 HEADERS			= includes/
 
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g3 -O0
 
 RM				= rm -f
 

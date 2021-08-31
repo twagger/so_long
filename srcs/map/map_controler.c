@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 17:36:48 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:22:00 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ int	ft_is_line_a_wall(char *line)
 	return (1);
 }
 
-int	ft_is_line_ok(char *line, size_t size, int *first)
+int	ft_is_line_ok(char *line, size_t size, int *wall_chk)
 {
 	int	i;
 
 	if (ft_strlen(line) != size)
 		return (0);
-	if (*first)
+	if (!wall_chk || *wall_chk)
 	{
-		*first = 0;
+		if (wall_chk)
+			*wall_chk = 0;
 		if (!ft_is_line_a_wall(line))
 			return (0);
 		return (1);
@@ -83,14 +84,14 @@ void	ft_mandatory_char_check(char *line, int *chk)
 		*chk += 'C';
 }
 
-int	ft_map_controler(int fd)
+int	ft_map_controler(int fd, int *rows)
 {
 	int		ret;
 	int		char_chk;
 	int		wall_chk;
 	size_t	len;
 	char	*line;
-	
+
 	line = NULL;
 	wall_chk = 1;
 	char_chk = 0;
@@ -98,22 +99,16 @@ int	ft_map_controler(int fd)
 	len = ft_strlen(line);
 	while (ret > 0)
 	{
+		++(*rows);
 		if (!ft_is_line_ok(line, len, &wall_chk))
-		{
-			free(line);
-			return (ERROR);
-		}
+			return (ft_free_and_return(&line, ERROR));
 		ft_mandatory_char_check(line, &char_chk);
 		free(line);
 		line = NULL;
 		ret = get_next_line(fd, &line);
 	}
-	wall_chk = 1;
-	if (ret == -1 || char_chk != 216 || !ft_is_line_ok(line, len, &wall_chk))
-	{
-		free(line);
-		return (ERROR);
-	}
+	if (ret == -1 || char_chk != 216 || !ft_is_line_ok(line, len, NULL))
+		return (ft_free_and_return(&line, ERROR));
 	free(line);
 	return (0);
 }

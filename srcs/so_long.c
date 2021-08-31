@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/30 17:15:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:36:17 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include <unistd.h>
 #include "so_long.h"
 
-int	ft_is_map_valid(char *map_file)
+int	ft_create_map(char *map_file, t_map *map, int rows)
 {
 	int	fd;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == ERROR)
 		return (0);
-	if (ft_map_controler(fd) == ERROR)
+	if (ft_map_creator(fd, map, rows) == ERROR)
 	{
 		close(fd);
 		return (0);
@@ -30,11 +30,20 @@ int	ft_is_map_valid(char *map_file)
 	return (1);
 }
 
-int	ft_exit_w_message(char *message, int fd, int code)
+int	ft_is_map_valid(char *map_file, int *rows)
 {
-	ft_putstr_fd(message, fd);
-	ft_putchar_fd('\n', fd);
-	return (code);
+	int	fd;
+
+	fd = open(map_file, O_RDONLY);
+	if (fd == ERROR)
+		return (0);
+	if (ft_map_controler(fd, rows) == ERROR)
+	{
+		close(fd);
+		return (0);
+	}
+	close(fd);
+	return (1);
 }
 
 int	ft_is_ber_file(char *map_file)
@@ -57,12 +66,26 @@ int	ft_is_ber_file(char *map_file)
 
 int	main(int ac, char **av)
 {
+	int		rows;
+	t_map	map;
+
+	rows = 1;
 	if (ac != 2)
 		return (ft_exit_w_message("Error", 2, 1));
 	if (!ft_is_ber_file(av[1]))
 		return (ft_exit_w_message("Error", 2, 1));
-	if (!ft_is_map_valid(av[1]))
+	if (!ft_is_map_valid(av[1], &rows))
 		return (ft_exit_w_message("Error", 2, 1));
-	ft_putstr_fd("map ok\n", 1);
-	return (0);
+	if (ft_create_map(av[1], &map, rows) == ERROR)
+		return (ft_exit_w_message("Error", 2, 1));
+	/* */
+	int i;
+	i = -1;
+	while (++i < rows)
+	{
+		ft_putstr_fd(map.map[i], 1);
+		ft_putchar_fd('\n', 1);
+	}
+	/* */
+	return (ft_free_map(&map, 0));
 }
