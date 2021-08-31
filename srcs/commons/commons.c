@@ -6,10 +6,11 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 09:01:33 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 11:10:16 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "so_long.h"
 
 int	ft_free_and_return(char **to_free, int to_return)

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:44:48 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 11:09:58 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_map
 }			t_map;
 
 /*
+** Commons
+*/
+
+int	ft_free_and_return(char **to_free, int to_return);
+int	ft_exit_w_message(char *message, int fd, int code);
+
+/*
 ** Map
 */
 
@@ -34,10 +41,9 @@ int	ft_init_map(t_map *map, int rows);
 int	ft_free_map(t_map *map, int ret_code);
 
 /*
-** Commons
+** Game
 */
 
-int	ft_free_and_return(char **to_free, int to_return);
-int	ft_exit_w_message(char *message, int fd, int code);
+int	ft_game_loop(t_map *map);
 
 #endif

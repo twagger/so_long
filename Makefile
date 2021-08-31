@@ -2,6 +2,7 @@ SRCS			= srcs/so_long.c \
 				  srcs/map/map_controler.c \
 				  srcs/map/map_creator.c \
 				  srcs/map/map_utils.c \
+				  srcs/game/game_loop.c \
 				  srcs/commons/commons.c
 
 OBJS			= $(SRCS:.c=.o)
@@ -28,7 +29,7 @@ AR				= ar rcs
 				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) -I$(LIBDIR)
 
 $(NAME):		$(LIB) $(OBJS)
-				$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS) -L. -lft
+				$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS) -L. -lft -lmlx -framework OpenGL -framework AppKit
 
 all:			$(NAME)
 
