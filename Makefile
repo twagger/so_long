@@ -1,49 +1,54 @@
-SRCS			= srcs/so_long.c \
-				  srcs/map/map_controler.c \
-				  srcs/map/map_creator.c \
-				  srcs/map/map_utils.c \
-				  srcs/game/game_loop.c \
-				  srcs/commons/commons.c
+SRCS		= srcs/so_long.c \
+			  srcs/map/map_controler.c \
+			  srcs/map/map_creator.c \
+			  srcs/map/map_utils.c \
+			  srcs/game/game_loop.c \
+			  srcs/game/game_utils.c \
+			  srcs/actions/move_up.c \
+			  srcs/actions/actions_utils.c \
+			  srcs/commons/commons.c
 
-OBJS			= $(SRCS:.c=.o)
+OBJS		= $(SRCS:.c=.o)
 
-NAME			= so_long
+NAME		= so_long
 
-LIB				= libft.a
+LIB			= libft.a
 
-LIBHEADER		= libft.h
+LIBHEADER	= libft.h
 
-LIBDIR			= libft/
+LIBDIR		= libft/
 
-HEADERS			= includes/
+HEADERS		= includes/
 
-CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g3 -O0
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3 -O0
 
-RM				= rm -f
+RM			= rm -f
 
-CC				= gcc
+CC			= gcc
 
-AR				= ar rcs
+AR			= ar rcs
 
 .c.o:
-				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) -I$(LIBDIR)
+			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) -I$(LIBDIR)
 
-$(NAME):		$(LIB) $(OBJS)
-				$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS) -L. -lft -lmlx -framework OpenGL -framework AppKit
+$(NAME):	$(LIB) $(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS) -L. -lft -lmlx -framework OpenGL -framework AppKit
 
-all:			$(NAME)
+all:		$(NAME)
 
 clean:
-				$(RM) $(OBJS) $(LIB)
+			$(RM) $(OBJS) $(LIBDIR)$(LIB)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:		clean
+			$(RM) $(NAME)
 
-re:				fclean all
+re:			fclean all
 
 $(LIB):	
-				make bonus -C $(LIBDIR)
-				make clean -C $(LIBDIR)
-				mv $(LIBDIR)$(LIB) .
+			@echo ">> Compiling libft..."
+			@make -s -C $(LIBDIR)
+			@make clean -s -C $(LIBDIR)
+			@echo ">> libft compiled!"
+			@mv $(LIBDIR)$(LIB) .
 
-.PHONY:			all clean fclean c.o re
+.PHONY:		all clean fclean c.o re

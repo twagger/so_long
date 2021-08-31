@@ -6,11 +6,21 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:03:14 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:45:21 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 16:08:30 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_count_items(t_map *map, char *line)
+{
+	while (*line)
+	{
+		if (*line == 'C')
+			++(map->total_items);
+		++line;
+	}
+}
 
 void	ft_add_line(t_map *map, char *line)
 {
