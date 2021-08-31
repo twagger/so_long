@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:03:14 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:42:45 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:45:21 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_add_line(t_map *map, char *line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < map->rows)

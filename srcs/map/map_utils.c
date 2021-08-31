@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:19:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:45:29 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_free_map(t_map *map, int ret_code)
 
 int	ft_init_map(t_map *map, int rows)
 {
-	int i;
+	int	i;
 
 	map->map = (char **)malloc(sizeof(map->map) * rows);
 	if (!map->map)

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:04:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:44:48 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_map_controler(int fd, int *rows);
 int	ft_map_creator(int fd, t_map *map, int rows);
 int	ft_init_map(t_map *map, int rows);
 int	ft_free_map(t_map *map, int ret_code);
-
 
 /*
 ** Commons

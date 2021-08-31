@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:36:17 by twagner          ###   ########.fr       */
+/*   Updated: 2021/08/31 10:45:41 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,5 @@ int	main(int ac, char **av)
 		return (ft_exit_w_message("Error", 2, 1));
 	if (ft_create_map(av[1], &map, rows) == ERROR)
 		return (ft_exit_w_message("Error", 2, 1));
-	/* */
-	int i;
-	i = -1;
-	while (++i < rows)
-	{
-		ft_putstr_fd(map.map[i], 1);
-		ft_putchar_fd('\n', 1);
-	}
-	/* */
 	return (ft_free_map(&map, 0));
 }
