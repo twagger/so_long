@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 11:29:52 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:24:06 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
-#define UP 0
-#define RIGHT 1
-#define DOWN 2
-#define LEFT 3
+# define UP 0
+# define RIGHT 1
+# define DOWN 2
+# define LEFT 3
 
 typedef struct s_map
 {

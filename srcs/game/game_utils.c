@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:10:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 11:32:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:29:12 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char	*ft_get_path(int i)
 {
-	char path[23];
-	
+	char	path[23];
+
 	path[0] = '\0';
 	ft_strlcat(path, "tileset/default/", 23);
 	ft_strlcat(path, &SPRITES[i * 2], 19);

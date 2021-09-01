@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:07:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:28:53 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_game_loop(t_map *map)
 	param.map = map;
 	param.nb_items = 0;
 	param.nb_moves = 0;
-	mlx_hook(win, 2, 1L<<0, ft_handle_key, &param);
+	mlx_hook(win, 2, 1L << 0, ft_handle_key, &param);
 	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
 	return (0);
