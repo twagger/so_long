@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/01 16:16:49 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/01 16:21:12 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ LIBHEADER	= libft.h
 #             DIRECTORIES             #
 #######################################
 LIBDIR		= libft/
-HEADERS		= includes/
+HEADERS		= includes/mandatory/
 
 ######################################
 #               FLAGS                #
@@ -77,7 +77,7 @@ $(NAME):	$(LIB) $(OBJS)
 
 all:		$(NAME)
 
-bonus:		HEADERS = includes_bonus/
+bonus:		HEADERS = includes/bonus/
 bonus:		BFLAGS = -DBONUS
 bonus:		$(LIB) $(BOBJS)
 			@touch bonus
