@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 17:14:53 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 11:29:52 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # define ERROR -1
 # define AUTHORIZED "01CEP"
 # define WALL '1'
+# define NBSPRITES 17
+# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
+#define UP 0
+#define RIGHT 1
+#define DOWN 2
+#define LEFT 3
 
 typedef struct s_map
 {
@@ -32,6 +38,7 @@ typedef struct s_param
 	void	*win;
 	t_map	*map;
 	int		nb_items;
+	int		nb_moves;
 }			t_param;
 
 typedef struct s_player
@@ -68,7 +75,7 @@ int			ft_init_imgs(t_map *map, void *mlx);
 ** Actions
 */
 
-int			move_up(t_param *param);
+int			ft_move(t_param *param, int move);
 t_player	ft_get_player_pos(t_map *map);
 
 #endif

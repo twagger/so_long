@@ -6,17 +6,18 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 17:32:39 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:07:27 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "so_long.h"
 #define ESC 53
-#define TOP 13
-#define BOTTOM 1
-#define LEFT 0
-#define RIGHT 2
+#define W 13
+#define S 1
+#define A 0
+#define D 2
+#define KEYMAP "321----------0"
 
 void	ft_draw_map(t_map *map, void *mlx, void *win)
 {
@@ -47,8 +48,21 @@ int	ft_handle_key(int key, void *param)
 {
 	if (key == ESC)
 		exit(0);
-	if (key == TOP)
-		move_up(param);
+	if (key == W || key == S || key == A || key == D)
+	{
+		if (ft_move(param, KEYMAP[key] - 48) == 1)
+			exit(0);
+	}
+	ft_putstr_fd("Current move count : ", 1);
+	ft_putnbr_fd(((t_param *)param)->nb_moves, 1);
+	ft_putchar_fd('\n', 1);
+	return (0);
+}
+
+int	ft_handle_close(void *param)
+{
+	ft_free_map(((t_param *)param)->map, ERROR);
+	exit(0);
 	return (0);
 }
 
@@ -61,12 +75,15 @@ int	ft_game_loop(t_map *map)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, map->cols * 32, map->rows * 32, "so long");
 	if (ft_init_imgs(map, mlx) == ERROR)
-		return (ERROR);
+		return (ft_free_map(map, ERROR));
 	ft_draw_map(map, mlx, win);
 	param.mlx = mlx;
 	param.win = win;
 	param.map = map;
-	mlx_key_hook(win, ft_handle_key, &param);
+	param.nb_items = 0;
+	param.nb_moves = 0;
+	mlx_hook(win, 2, 1L<<0, ft_handle_key, &param);
+	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
 	return (0);
 }

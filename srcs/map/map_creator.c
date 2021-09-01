@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:03:14 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 16:08:30 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 11:49:46 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_add_line(t_map *map, char *line)
 	int	i;
 
 	i = -1;
+	ft_count_items(map, line);
 	while (++i < map->rows)
 	{
 		if (!map->map[i])
