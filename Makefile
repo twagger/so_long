@@ -37,7 +37,7 @@ $(NAME):	$(LIB) $(OBJS)
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJS) $(LIBDIR)$(LIB)
+			$(RM) $(OBJS) $(LIB)
 
 fclean:		clean
 			$(RM) $(NAME)
