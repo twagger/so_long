@@ -1,9 +1,8 @@
 SRCS		= srcs/so_long.c \
 			  srcs/map/map_controler.c \
-			  srcs/map/map_creator.c \
 			  srcs/map/map_utils.c \
-			  srcs/game/game_loop.c \
-			  srcs/game/game_utils.c \
+			  srcs/loop/loop_utils.c \
+			  srcs/sprites/sprites_utils.c \
 			  srcs/actions/move.c \
 			  srcs/actions/actions_utils.c \
 			  srcs/commons/commons.c

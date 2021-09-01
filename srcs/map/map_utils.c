@@ -6,10 +6,11 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 11:03:40 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:53:58 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "so_long.h"
 
 int	ft_free_map(t_map *map, int ret_code)
@@ -49,5 +50,75 @@ int	ft_init_map(t_map *map, int rows)
 	map->cols = 0;
 	map->total_items = 0;
 	map->img = NULL;
+	return (0);
+}
+
+void	ft_draw_map(t_map *map, void *mlx, void *win)
+{
+	int	col;
+	int	row;
+	int	img_i;
+	int	curr_x;
+	int	curr_y;
+
+	curr_y = 0;
+	row = -1;
+	while (++row < map->rows)
+	{
+		col = -1;
+		curr_x = 0;
+		while (++col < map->cols)
+		{
+			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
+			mlx_put_image_to_window(mlx, win, map->img[0], curr_x, curr_y);
+			mlx_put_image_to_window(mlx, win, map->img[img_i], curr_x, curr_y);
+			curr_x += 32;
+		}
+		curr_y += 32;
+	}
+}
+
+void	ft_add_line(t_map *map, char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == 'C')
+			++(map->total_items);
+	}
+	i = -1;
+	while (++i < map->rows)
+	{
+		if (!map->map[i])
+		{
+			map->map[i] = line;
+			break ;
+		}
+	}
+	if (map->cols == 0)
+		map->cols = ft_strlen(line);
+}
+
+int	ft_create_map(int fd, t_map *map, int rows)
+{
+	int		ret;
+	char	*line;
+
+	if (ft_init_map(map, rows) == ERROR)
+		return (ERROR);
+	line = NULL;
+	ret = get_next_line(fd, &line);
+	while (ret > 0)
+	{
+		ft_add_line(map, line);
+		line = NULL;
+		ret = get_next_line(fd, &line);
+	}
+	if (ret == ERROR)
+		return (ft_free_map(map, ERROR));
+	else
+		ft_add_line(map, line);
 	return (0);
 }

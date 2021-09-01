@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:24:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:55:47 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,28 @@ typedef struct s_player
 */
 
 int			ft_free_and_return(char **to_free, int to_return);
-int			ft_exit_w_message(char *message, int fd, int code);
+int			ft_exit_w_message(char *message, char *message2, int fd, int code);
 
 /*
 ** Map
 */
 
 int			ft_map_controler(int fd, int *rows);
-int			ft_map_creator(int fd, t_map *map, int rows);
-int			ft_init_map(t_map *map, int rows);
+int			ft_create_map(int fd, t_map *map, int rows);
+void		ft_draw_map(t_map *map, void *mlx, void *win);
 int			ft_free_map(t_map *map, int ret_code);
 
 /*
-** Game
+** Loop
 */
 
-int			ft_game_loop(t_map *map);
+int			ft_handle_close(void *param);
+int			ft_handle_key(int key, void *param);
+
+/*
+** Sprites
+*/
+
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_map *map, void *mlx);
 
