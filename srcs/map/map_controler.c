@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/08/31 10:22:00 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:15:12 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	ft_is_yet_char(const char *possibles, int c, int chk)
 
 void	ft_mandatory_char_check(char *line, int *chk)
 {
+	if (ft_strchr(line, 'P') - line >= 0 && ft_is_yet_char("EC", 'P', *chk))
+		*chk = -1;
 	if (ft_strchr(line, 'E') - line >= 0 && !ft_is_yet_char("PC", 'E', *chk))
 		*chk += 'E';
 	if (ft_strchr(line, 'P') - line >= 0 && !ft_is_yet_char("EC", 'P', *chk))
