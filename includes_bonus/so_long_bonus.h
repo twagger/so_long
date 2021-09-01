@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 14:45:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 14:40:48 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"
 # define WALL '1'
-# define NBSPRITES 5
-# define SPRITES "0001COEXPL"
+# define NBSPRITES 17
+# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
 # define UP 0
 # define RIGHT 1
 # define DOWN 2

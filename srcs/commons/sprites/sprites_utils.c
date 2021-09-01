@@ -6,12 +6,16 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 12:35:32 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:54:12 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 16:10:01 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "so_long.h"
+#ifdef BONUS
+# include "so_long_bonus.h"
+#else
+# include "so_long.h"
+#endif
 
 char	*ft_get_path(int i)
 {

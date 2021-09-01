@@ -6,11 +6,15 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 14:15:12 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 16:19:11 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifdef BONUS
+# include "so_long_bonus.h"
+#else
+# include "so_long.h"
+#endif
 
 int	ft_is_line_a_wall(char *line)
 {

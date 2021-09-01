@@ -6,12 +6,16 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:53:58 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 16:09:55 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "so_long.h"
+#ifdef BONUS
+# include "so_long_bonus.h"
+#else
+# include "so_long.h"
+#endif
 
 int	ft_free_map(t_map *map, int ret_code)
 {
