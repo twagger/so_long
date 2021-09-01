@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 13:02:02 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 17:57:38 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_game_loop(t_map *map)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, map->cols * 32, map->rows * 32, "so long");
 	if (ft_init_imgs(map, mlx) == ERROR)
-		return (ft_free_map(map, ERROR));
+		return (ft_free_map(map, ERROR, mlx));
 	ft_draw_map(map, mlx, win);
 	param.mlx = mlx;
 	param.win = win;
@@ -86,7 +86,7 @@ int	ft_game_loop(t_map *map)
 	mlx_hook(win, 2, 1L << 0, ft_handle_key, &param);
 	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
-	return (0);
+	return (ft_free_map(map, 0, mlx));
 }
 
 int	main(int ac, char **av)
@@ -109,5 +109,5 @@ int	main(int ac, char **av)
 		return (ft_exit_w_message("Error", NULL, 2, 1));
 	if (ft_game_loop(&map) == ERROR)
 		return (ft_exit_w_message("Error", NULL, 2, 1));
-	return (ft_free_map(&map, 0));
+	return (0);
 }

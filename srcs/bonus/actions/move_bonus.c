@@ -6,36 +6,27 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 15:07:30 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 16:52:43 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long_bonus.h"
 
 void	ft_do_move(t_player p, int move, t_param *param)
 {
-	int	next_x;
-	int	next_y;
-
-	next_x = p.x;
-	next_y = p.y;
+	p.next_x = p.x;
+	p.next_y = p.y;
 	if (move == UP)
-		--next_y;
+		--(p.next_y);
 	if (move == RIGHT)
-		++next_x;
+		++(p.next_x);
 	if (move == LEFT)
-		--next_x;
+		--(p.next_x);
 	if (move == DOWN)
-		++next_y;
-	param->map->map[next_y][next_x] = 'P';
+		++(p.next_y);
+	param->map->map[p.next_y][p.next_x] = 'P';
 	param->map->map[p.y][p.x] = '0';
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[0], p.x * 32, p.y * 32);
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[0], next_x * 32, next_y * 32);
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[4], next_x * 32, next_y * 32);
+	ft_animate_move(p, move, param);
 	++(param->nb_moves);
 }
 

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:52:55 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 17:55:22 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_handle_key(int key, void *param)
 
 int	ft_handle_close(void *param)
 {
-	ft_free_map(((t_param *)param)->map, ERROR);
+	ft_free_map(((t_param *)param)->map, ERROR, ((t_param *)param)->mlx);
 	exit(0);
 	return (0);
 }

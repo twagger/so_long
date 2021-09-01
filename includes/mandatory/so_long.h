@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 14:45:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 17:53:38 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			ft_exit_w_message(char *message, char *message2, int fd, int code);
 int			ft_map_controler(int fd, int *rows);
 int			ft_create_map(int fd, t_map *map, int rows);
 void		ft_draw_map(t_map *map, void *mlx, void *win);
-int			ft_free_map(t_map *map, int ret_code);
+int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 /*
 ** Loop

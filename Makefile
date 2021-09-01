@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/01 16:25:34 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/01 17:11:55 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ BSRCS		= srcs/bonus/so_long_bonus.c \
 			  srcs/commons/sprites/sprites_utils.c \
 			  srcs/commons/commons.c \
 			  srcs/bonus/loop/loop_utils_bonus.c \
-			  srcs/bonus/actions/move_bonus.c
+			  srcs/bonus/actions/move_bonus.c \
+			  srcs/bonus/actions/animation_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 BOBJS		= $(BSRCS:.c=.o)
@@ -79,7 +80,7 @@ all:		$(NAME)
 
 bonus:		HEADERS = includes/bonus/
 bonus:		BFLAGS = -DBONUS
-bonus:		$(LIB) $(BOBJS)
+bonus:		$(LIB) $(BOBJS) #ne recompile pas les commons avec le bon .h > A gerer
 			@touch bonus
 			$(CC) $(CFLAGS) $(MLXFLAGS) $(LIBFLAGS) $(BOBJS) -o $(NAME) -I$(BHEADERS)
 

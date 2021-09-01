@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 14:40:48 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:03:07 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	next_x;
+	int	next_y;
 }		t_player;
 
 /*
@@ -61,7 +63,7 @@ int			ft_exit_w_message(char *message, char *message2, int fd, int code);
 int			ft_map_controler(int fd, int *rows);
 int			ft_create_map(int fd, t_map *map, int rows);
 void		ft_draw_map(t_map *map, void *mlx, void *win);
-int			ft_free_map(t_map *map, int ret_code);
+int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 /*
 ** Loop
@@ -69,6 +71,7 @@ int			ft_free_map(t_map *map, int ret_code);
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
+int			ft_render_frame(void *param);
 
 /*
 ** Sprites
@@ -83,5 +86,6 @@ int			ft_init_imgs(t_map *map, void *mlx);
 
 int			ft_move(t_param *param, int move);
 t_player	ft_get_player_pos(t_map *map);
+void		ft_animate_move(t_player p, int dir, t_param *param);
 
 #endif

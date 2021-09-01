@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 16:09:55 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:03:58 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "so_long.h"
 #endif
 
-int	ft_free_map(t_map *map, int ret_code)
+int	ft_free_map(t_map *map, int ret_code, void *mlx)
 {
 	int	i;
 
@@ -33,7 +33,12 @@ int	ft_free_map(t_map *map, int ret_code)
 		{
 			i = -1;
 			while (++i < NBSPRITES)
-				free(map->img[i]);
+			{
+				if (mlx)
+					mlx_destroy_image(mlx, map->img[i]);
+				else
+					free(map->img[i]);
+			}
 			free(map->img);
 		}
 	}
@@ -121,7 +126,7 @@ int	ft_create_map(int fd, t_map *map, int rows)
 		ret = get_next_line(fd, &line);
 	}
 	if (ret == ERROR)
-		return (ft_free_map(map, ERROR));
+		return (ft_free_map(map, ERROR, NULL));
 	else
 		ft_add_line(map, line);
 	return (0);
