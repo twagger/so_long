@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 15:29:16 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:15:49 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"
-# define STATIC "01CEP"
+# define STATIC "01E"
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
@@ -109,7 +109,15 @@ void		ft_animate_move(t_player p, int dir, t_param *param);
 ** Info bar
 */
 
-void		ft_init_infobar(t_param *param);
+int			ft_init_infobar(t_param *param);
 int			ft_update_move_info(t_param *prm);
+
+/*
+** Animation
+*/
+
+int			ft_init_frame(t_param *prm);
+void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
+void		ft_put_object(void *img, t_data *frame, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:42:35 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 15:24:15 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:16:30 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ int	ft_game_loop(t_map *map)
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, map->cols * SSIZE, \
-		(map->rows * SSIZE) + SSIZE, "so long");
+		(map->rows * SSIZE) + TOP_GAP, "so long");
 	if (ft_init_imgs(map, mlx) == ERROR)
 		return (ft_free_map(map, ERROR, mlx));
 	ft_draw_map(map, mlx, win);
 	ft_init_param(&param, mlx, win, map);
-	ft_init_infobar(&param);
-	ft_update_move_info(&param);
+	if (ft_init_infobar(&param) == ERROR)
+		return (ft_free_map(map, ERROR, mlx));
+	if (ft_update_move_info(&param) == ERROR)
+		return (ft_free_map(map, ERROR, mlx));
+	if (ft_init_frame(&param) == ERROR)
+		return (ft_free_map(map, ERROR, mlx));
 	mlx_hook(win, 2, 1L << 0, ft_handle_key, &param);
 	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
