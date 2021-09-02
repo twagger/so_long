@@ -6,14 +6,12 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 10:06:33 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:51:24 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "so_long.h"
-#define KEEP 1
-#define CLEAR 0
 
 void	ft_get_next_position(t_player *p, int move)
 {
@@ -40,12 +38,6 @@ char	ft_get_next_tile(t_player p, int move, t_map *map)
 	if (move == DOWN)
 		return (map->map[p.y + 1][p.x]);
 	return ('X');
-}
-
-void	ft_draw_sprite(t_param *param, void *img, int x, int y)
-{
-	mlx_put_image_to_window(param->mlx, param->win, \
-			img, x * SSIZE, y * SSIZE);
 }
 
 void	ft_do_move(t_player p, int move, t_param *param)

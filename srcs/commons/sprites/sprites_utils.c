@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 12:35:32 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 10:30:08 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 11:05:04 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_get_path(int i)
 	char	path[50];
 
 	path[0] = '\0';
-	ft_strlcat(path, "tileset/", 50);
+	ft_strlcat(path, "theme/", 50);
 	ft_strlcat(path, THEME, 50);
 	ft_strlcat(path, "/", 50);
 	ft_strlcat(path, &SPRITES[i * 2], ft_strlen(path) + 3);
@@ -54,4 +54,10 @@ int	ft_init_imgs(t_map *map, void *mlx)
 			return (ERROR);
 	}
 	return (0);
+}
+
+void	ft_draw_sprite(t_param *param, void *img, int x, int y)
+{
+	mlx_put_image_to_window(param->mlx, param->win, \
+			img, x * SSIZE, y * SSIZE);
 }

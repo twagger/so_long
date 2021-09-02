@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:36:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:51:09 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
+# define SSIZE 32
+# define THEME "default"
 # define UP 0
 # define RIGHT 1
 # define DOWN 2
@@ -80,6 +82,7 @@ int			ft_render_frame(void *param);
 
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_map *map, void *mlx);
+void		ft_draw_sprite(t_param *param, void *img, int x, int y);
 
 /*
 ** Actions

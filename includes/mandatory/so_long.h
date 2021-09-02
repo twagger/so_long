@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 10:31:16 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 11:06:38 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			ft_handle_key(int key, void *param);
 
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_map *map, void *mlx);
+void		ft_draw_sprite(t_param *param, void *img, int x, int y);
 
 /*
 ** Actions
