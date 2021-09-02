@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_utils.c                                       :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:48:09 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:44:41 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,17 @@
 int	ft_handle_key(int key, void *param)
 {
 	if (key == ESC)
+	{
+		ft_free_map(((t_param *)param)->map, 0, ((t_param *)param)->mlx);
 		exit(0);
+	}
 	if (key == W || key == S || key == A || key == D)
 	{
 		if (ft_mover(param, KEYMAP[key] - 48) == 1)
+		{
+			ft_free_map(((t_param *)param)->map, 0, ((t_param *)param)->mlx);
 			exit(0);
+		}
 	}
 	ft_putstr_fd("Current move count : ", 1);
 	ft_putnbr_fd(((t_param *)param)->nb_moves, 1);
@@ -35,7 +41,7 @@ int	ft_handle_key(int key, void *param)
 
 int	ft_handle_close(void *param)
 {
-	ft_free_map(((t_param *)param)->map, ERROR, ((t_param *)param)->mlx);
+	ft_free_map(((t_param *)param)->map, 0, ((t_param *)param)->mlx);
 	exit(0);
 	return (0);
 }
