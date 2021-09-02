@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 13:47:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:29:16 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define SSIZE 32
 # define TOP_GAP 25
 # define THEME "default"
+# define BG_COLOR 0x009C9C15
+# define TXT_COLOR 0x00FFFFFF
 # define UP 0
 # define RIGHT 1
 # define DOWN 2
@@ -44,7 +46,6 @@ typedef struct s_param
 	int		nb_items;
 	int		nb_moves;
 	int		is_on_exit;
-	void	*info_img;
 }			t_param;
 
 typedef struct s_player
@@ -54,6 +55,14 @@ typedef struct s_player
 	int	next_x;
 	int	next_y;
 }		t_player;
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
 /*
 ** Commons
@@ -73,19 +82,20 @@ void		ft_draw_map(t_map *map, void *mlx, void *win);
 int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 /*
-** Loop
+** Hooks
 */
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
+void		ft_init_param(t_param *param, void *mlx, void *win, t_map *map);
 
 /*
-** Sprites
+** Images
 */
 
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_map *map, void *mlx);
-void		ft_draw_sprite(t_param *param, void *img, int x, int y);
+void		ft_draw_image(t_param *param, void *img, int x, int y);
 
 /*
 ** Actions
@@ -94,5 +104,12 @@ void		ft_draw_sprite(t_param *param, void *img, int x, int y);
 int			ft_move(t_param *param, int move);
 t_player	ft_get_player_pos(t_map *map);
 void		ft_animate_move(t_player p, int dir, t_param *param);
+
+/*
+** Info bar
+*/
+
+void		ft_init_infobar(t_param *param);
+int			ft_update_move_info(t_param *prm);
 
 #endif

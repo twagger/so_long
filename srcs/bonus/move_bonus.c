@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 12:12:09 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:32:30 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,25 @@ char	ft_get_next_tile(t_player p, int move, t_map *map)
 void	ft_do_move(t_player p, int move, t_param *param)
 {
 	ft_get_next_position(&p, move);
+	ft_draw_image(param, param->map->img[0], p.x, p.y);
 	if (param->is_on_exit == 1)
 	{
-		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
-		ft_draw_sprite(param, param->map->img[3], p.x, p.y);
+		ft_draw_image(param, param->map->img[3], p.x, p.y);
 		param->map->map[p.y][p.x] = 'E';
 	}
 	else
-	{
-		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
 		param->map->map[p.y][p.x] = '0';
-	}
 	if (param->map->map[p.next_y][p.next_x] == 'E')
-	{
-		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
 		param->is_on_exit = 1;
-	}
 	else
 	{
-		ft_draw_sprite(param, param->map->img[0], p.next_x, p.next_y);
-		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
+		ft_draw_image(param, param->map->img[0], p.next_x, p.next_y);
 		param->is_on_exit = 0;
 	}
+	ft_draw_image(param, param->map->img[4], p.next_x, p.next_y);
 	param->map->map[p.next_y][p.next_x] = 'P';
 	++(param->nb_moves);
+	ft_update_move_info(param);
 }
 
 int	ft_move(t_param *param, int move)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites_utils.c                                    :+:      :+:    :+:   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 12:35:32 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 13:46:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:44:13 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_init_imgs(t_map *map, void *mlx)
 	return (0);
 }
 
-void	ft_draw_sprite(t_param *param, void *img, int x, int y)
+void	ft_draw_image(t_param *param, void *img, int x, int y)
 {
 	mlx_put_image_to_window(param->mlx, param->win, \
 			img, x * SSIZE, (y * SSIZE) + TOP_GAP);

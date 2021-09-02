@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_utils_bonus.c                                 :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 12:31:18 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:00:28 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,13 @@
 #define D 2
 #define KEYMAP "321----------0"
 
-int	ft_update_move_info(void *param)
+void	ft_init_param(t_param *param, void *mlx, void *win, t_map *map)
 {
-	t_param *prm;
-	void	*info_img;
-
-	prm = (t_param *)param;
-	if (prm->info_img)
-		mlx_destroy_image(prm->mlx, prm->info_img);
-	info_img = mlx_new_image(prm->mlx, prm->map->cols * SSIZE, \
-		prm->map->rows * SSIZE);
-	mlx_string_put(prm->mlx, info_img, 100, 0, create_trgb(0, 255, 255, 255), \
-			"1");
-	return (0);
+	param->mlx = mlx;
+	param->win = win;
+	param->map = map;
+	param->nb_items = 0;
+	param->nb_moves = 0;
 }
 
 int	ft_handle_key(int key, void *param)

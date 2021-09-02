@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 13:42:04 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:26:42 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ void		ft_draw_map(t_map *map, void *mlx, void *win);
 int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 /*
-** Loop
+** Hooks
 */
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
 
 /*
-** Sprites
+** Images
 */
 
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_map *map, void *mlx);
-void		ft_draw_sprite(t_param *param, void *img, int x, int y);
+void		ft_draw_image(t_param *param, void *img, int x, int y);
 
 /*
 ** Actions

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:42:35 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 13:35:46 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:24:15 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,9 @@ int	ft_game_loop(t_map *map)
 	if (ft_init_imgs(map, mlx) == ERROR)
 		return (ft_free_map(map, ERROR, mlx));
 	ft_draw_map(map, mlx, win);
-	if (map->cols > 5)
-		mlx_string_put(mlx, win, 8, 2, create_trgb(0, 255, 255, 255), \
-			"Total moves : ");
-	param.mlx = mlx;
-	param.win = win;
-	param.map = map;
-	param.nb_items = 0;
-	param.nb_moves = 0;
-	param.info_img = NULL;
+	ft_init_param(&param, mlx, win, map);
+	ft_init_infobar(&param);
+	ft_update_move_info(&param);
 	mlx_hook(win, 2, 1L << 0, ft_handle_key, &param);
 	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
