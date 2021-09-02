@@ -6,40 +6,30 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 12:24:49 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:06:33 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "so_long.h"
+#define KEEP 1
+#define CLEAR 0
 
-void	ft_do_move(t_player p, int move, t_param *param)
+void	ft_get_next_position(t_player *p, int move)
 {
-	int	next_x;
-	int	next_y;
-
-	next_x = p.x;
-	next_y = p.y;
+	p->next_x = p->x;
+	p->next_y = p->y;
 	if (move == UP)
-		--next_y;
+		--(p->next_y);
 	if (move == RIGHT)
-		++next_x;
+		++(p->next_x);
 	if (move == LEFT)
-		--next_x;
+		--(p->next_x);
 	if (move == DOWN)
-		++next_y;
-	param->map->map[next_y][next_x] = 'P';
-	param->map->map[p.y][p.x] = '0';
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[0], p.x * 32, p.y * 32);
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[0], next_x * 32, next_y * 32);
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->map->img[4], next_x * 32, next_y * 32);
-	++(param->nb_moves);
+		++(p->next_y);
 }
 
-char	ft_next_tile(t_player p, int move, t_map *map)
+char	ft_get_next_tile(t_player p, int move, t_map *map)
 {
 	if (move == UP)
 		return (map->map[p.y - 1][p.x]);
@@ -52,13 +42,48 @@ char	ft_next_tile(t_player p, int move, t_map *map)
 	return ('X');
 }
 
-int	ft_move(t_param *param, int move)
+void	ft_draw_sprite(t_param *param, void *img, int x, int y)
+{
+	mlx_put_image_to_window(param->mlx, param->win, \
+			img, x * SSIZE, y * SSIZE);
+}
+
+void	ft_do_move(t_player p, int move, t_param *param)
+{
+	ft_get_next_position(&p, move);
+	if (param->is_on_exit == 1)
+	{
+		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
+		ft_draw_sprite(param, param->map->img[3], p.x, p.y);
+		param->map->map[p.y][p.x] = 'E';
+	}
+	else
+	{
+		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
+		param->map->map[p.y][p.x] = '0';
+	}
+	if (param->map->map[p.next_y][p.next_x] == 'E')
+	{
+		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
+		param->is_on_exit = 1;
+	}
+	else
+	{
+		ft_draw_sprite(param, param->map->img[0], p.next_x, p.next_y);
+		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
+		param->is_on_exit = 0;
+	}
+	param->map->map[p.next_y][p.next_x] = 'P';
+	++(param->nb_moves);
+}
+
+int	ft_mover(t_param *param, int move)
 {
 	t_player	p;
 	char		next;
 
 	p = ft_get_player_pos(param->map);
-	next = ft_next_tile(p, move, param->map);
+	next = ft_get_next_tile(p, move, param->map);
 	if (next == '0')
 		ft_do_move(p, move, param);
 	if (next == 'C')
@@ -73,6 +98,8 @@ int	ft_move(t_param *param, int move)
 			ft_do_move(p, move, param);
 			return (1);
 		}
+		else
+			ft_do_move(p, move, param);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 17:53:38 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 09:56:13 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define WALL '1'
 # define NBSPRITES 5
 # define SPRITES "0001COEXPL"
+# define SSIZE 32
+# define THEME "default"
 # define UP 0
 # define RIGHT 1
 # define DOWN 2
@@ -39,12 +41,15 @@ typedef struct s_param
 	t_map	*map;
 	int		nb_items;
 	int		nb_moves;
+	int		is_on_exit;
 }			t_param;
 
 typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	next_x;
+	int	next_y;
 }		t_player;
 
 /*
@@ -81,7 +86,7 @@ int			ft_init_imgs(t_map *map, void *mlx);
 ** Actions
 */
 
-int			ft_move(t_param *param, int move);
+int			ft_mover(t_param *param, int move);
 t_player	ft_get_player_pos(t_map *map);
 
 #endif

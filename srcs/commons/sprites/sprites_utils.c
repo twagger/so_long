@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 12:35:32 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 16:10:01 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 09:57:20 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char	*ft_get_path(int i)
 	char	path[23];
 
 	path[0] = '\0';
-	ft_strlcat(path, "tileset/default/", 23);
+	ft_strlcat(path, "tileset/", 23);
+	ft_strlcat(path, THEME, 23);
+	ft_strlcat(path, "/", 23);
 	ft_strlcat(path, &SPRITES[i * 2], 19);
 	ft_strlcat(path, ".xpm", 23);
 	return (ft_strdup(path));

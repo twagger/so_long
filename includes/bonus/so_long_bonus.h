@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 18:03:07 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 09:36:47 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_param
 	t_map	*map;
 	int		nb_items;
 	int		nb_moves;
+	int		is_on_exit;
 }			t_param;
 
 typedef struct s_player

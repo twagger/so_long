@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 17:57:38 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 09:54:41 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_game_loop(t_map *map)
 	t_param	param;
 
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, map->cols * 32, map->rows * 32, "so long");
+	win = mlx_new_window(mlx, map->cols * SSIZE, map->rows * SSIZE, "so long");
 	if (ft_init_imgs(map, mlx) == ERROR)
 		return (ft_free_map(map, ERROR, mlx));
 	ft_draw_map(map, mlx, win);
