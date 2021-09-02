@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 17:15:49 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:44:45 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define ERROR -1
 # define AUTHORIZED "01CEP"
 # define STATIC "01E"
+# define MOVABLE "CP"
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
@@ -38,16 +39,6 @@ typedef struct s_map
 	void	**img;
 }			t_map;
 
-typedef struct s_param
-{
-	void	*mlx;
-	void	*win;
-	t_map	*map;
-	int		nb_items;
-	int		nb_moves;
-	int		is_on_exit;
-}			t_param;
-
 typedef struct s_player
 {
 	int	x;
@@ -56,13 +47,25 @@ typedef struct s_player
 	int	next_y;
 }		t_player;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 }			t_data;
+
+typedef struct s_param
+{
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	int		nb_items;
+	int		nb_moves;
+	int		is_on_exit;
+	t_data	*frame;
+}			t_param;
 
 /*
 ** Commons

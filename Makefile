@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/02 16:45:28 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/02 17:25:27 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ BSRCS		= srcs/bonus/so_long_bonus.c \
 			  srcs/bonus/move_bonus.c \
 			  srcs/bonus/animations_bonus.c \
 			  srcs/bonus/infobar_bonus.c \
-			  srcs/bonus/drawing_utils_bonus.c
+			  srcs/bonus/drawing_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 BOBJS		= $(BSRCS:.c=.o)
