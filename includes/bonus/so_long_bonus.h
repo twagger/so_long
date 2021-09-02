@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 10:51:09 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:47:43 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"
+# define STATIC "01CEP"
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
 # define SSIZE 32
+# define TOP_GAP 25
 # define THEME "default"
 # define UP 0
 # define RIGHT 1
@@ -42,6 +44,7 @@ typedef struct s_param
 	int		nb_items;
 	int		nb_moves;
 	int		is_on_exit;
+	void	*info_img;
 }			t_param;
 
 typedef struct s_player
@@ -58,6 +61,7 @@ typedef struct s_player
 
 int			ft_free_and_return(char **to_free, int to_return);
 int			ft_exit_w_message(char *message, char *message2, int fd, int code);
+int			create_trgb(int t, int r, int g, int b);
 
 /*
 ** Map
@@ -74,7 +78,6 @@ int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
-int			ft_render_frame(void *param);
 
 /*
 ** Sprites

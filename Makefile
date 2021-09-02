@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/01 17:11:55 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/02 13:53:58 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,23 +21,23 @@ AR			= ar rcs
 #                                 SOURCES                                      #
 ################################################################################
 SRCS		= srcs/mandatory/so_long.c \
-			  srcs/commons/map/map_controler.c \
-			  srcs/commons/map/map_utils.c \
-			  srcs/commons/actions/actions_utils.c \
-			  srcs/commons/sprites/sprites_utils.c \
-			  srcs/commons/commons.c \
-			  srcs/mandatory/loop/loop_utils.c \
-			  srcs/mandatory/actions/move.c
+			  srcs/commons/map_controler.c \
+			  srcs/commons/map_utils.c \
+			  srcs/commons/actions_utils.c \
+			  srcs/commons/sprites_utils.c \
+			  srcs/commons/utils.c \
+			  srcs/mandatory/hooks.c \
+			  srcs/mandatory/move.c
 
 BSRCS		= srcs/bonus/so_long_bonus.c \
-			  srcs/commons/map/map_controler.c \
-			  srcs/commons/map/map_utils.c \
-			  srcs/commons/actions/actions_utils.c \
-			  srcs/commons/sprites/sprites_utils.c \
-			  srcs/commons/commons.c \
-			  srcs/bonus/loop/loop_utils_bonus.c \
-			  srcs/bonus/actions/move_bonus.c \
-			  srcs/bonus/actions/animation_bonus.c
+			  srcs/commons/map_controler.c \
+			  srcs/commons/map_utils.c \
+			  srcs/commons/actions_utils.c \
+			  srcs/commons/sprites_utils.c \
+			  srcs/commons/utils.c \
+			  srcs/bonus/hooks_bonus.c \
+			  srcs/bonus/move_bonus.c \
+			  srcs/bonus/animations_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 BOBJS		= $(BSRCS:.c=.o)

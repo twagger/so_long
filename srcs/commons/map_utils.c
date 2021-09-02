@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:58:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:41:54 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_draw_map(t_map *map, void *mlx, void *win)
 	int	curr_x;
 	int	curr_y;
 
-	curr_y = 0;
+	curr_y = TOP_GAP;
 	row = -1;
 	while (++row < map->rows)
 	{
@@ -80,7 +80,8 @@ void	ft_draw_map(t_map *map, void *mlx, void *win)
 		{
 			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
 			mlx_put_image_to_window(mlx, win, map->img[0], curr_x, curr_y);
-			mlx_put_image_to_window(mlx, win, map->img[img_i], curr_x, curr_y);
+			if (ft_strchr(STATIC, map->map[row][col]))
+				mlx_put_image_to_window(mlx, win, map->img[img_i], curr_x, curr_y);
 			curr_x += SSIZE;
 		}
 		curr_y += SSIZE;

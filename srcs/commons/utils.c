@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/01 16:10:05 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 11:56:15 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ int	ft_exit_w_message(char *message, char *message2, int fd, int code)
 		ft_putchar_fd('\n', fd);
 	}
 	return (code);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }

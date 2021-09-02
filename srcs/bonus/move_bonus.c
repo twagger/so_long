@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 10:50:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 12:12:09 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,29 @@ char	ft_get_next_tile(t_player p, int move, t_map *map)
 void	ft_do_move(t_player p, int move, t_param *param)
 {
 	ft_get_next_position(&p, move);
+	if (param->is_on_exit == 1)
+	{
+		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
+		ft_draw_sprite(param, param->map->img[3], p.x, p.y);
+		param->map->map[p.y][p.x] = 'E';
+	}
+	else
+	{
+		ft_draw_sprite(param, param->map->img[0], p.x, p.y);
+		param->map->map[p.y][p.x] = '0';
+	}
+	if (param->map->map[p.next_y][p.next_x] == 'E')
+	{
+		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
+		param->is_on_exit = 1;
+	}
+	else
+	{
+		ft_draw_sprite(param, param->map->img[0], p.next_x, p.next_y);
+		ft_draw_sprite(param, param->map->img[4], p.next_x, p.next_y);
+		param->is_on_exit = 0;
+	}
 	param->map->map[p.next_y][p.next_x] = 'P';
-	param->map->map[p.y][p.x] = '0';
-	ft_animate_move(p, move, param);
 	++(param->nb_moves);
 }
 
@@ -54,7 +74,7 @@ int	ft_move(t_param *param, int move)
 	char		next;
 
 	p = ft_get_player_pos(param->map);
-	next = ft_next_tile(p, move, param->map);
+	next = ft_get_next_tile(p, move, param->map);
 	if (next == '0')
 		ft_do_move(p, move, param);
 	if (next == 'C')
@@ -69,6 +89,8 @@ int	ft_move(t_param *param, int move)
 			ft_do_move(p, move, param);
 			return (1);
 		}
+		else
+			ft_do_move(p, move, param);
 	}
 	return (0);
 }

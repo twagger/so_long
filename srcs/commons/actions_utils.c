@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:49:01 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:36:59 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:42:31 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_player	ft_get_player_pos(t_map *map)
 		}
 	}
 	player.x = 0;
-	player.y = 0;
+	player.y = TOP_GAP;
 	return (player);
 }
