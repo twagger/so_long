@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:56:13 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:31:16 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define NBSPRITES 5
 # define SPRITES "0001COEXPL"
 # define SSIZE 32
-# define THEME "default"
+# define THEME "halloween"
 # define UP 0
 # define RIGHT 1
 # define DOWN 2
