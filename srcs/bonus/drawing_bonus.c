@@ -6,11 +6,10 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 17:47:07 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 23:40:26 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long_bonus.h"
 
 void	ft_img_pixel_put(t_data *data, int x, int y, int pix)

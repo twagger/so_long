@@ -6,11 +6,10 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:56:53 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 17:17:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 23:40:25 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long_bonus.h"
 
 int	ft_init_infobar(t_param *prm)

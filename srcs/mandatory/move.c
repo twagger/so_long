@@ -6,11 +6,10 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 15:33:18 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:43:28 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long.h"
 
 void	ft_get_next_position(t_player *p, int move)

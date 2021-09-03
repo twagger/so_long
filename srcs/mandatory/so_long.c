@@ -6,13 +6,12 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:11:47 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 09:54:41 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 23:41:15 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
-#include <mlx.h>
 #include <string.h>
 #include <errno.h>
 #include "so_long.h"

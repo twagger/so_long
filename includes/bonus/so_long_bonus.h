@@ -6,12 +6,17 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 17:44:45 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:17:03 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
+# ifdef LINUX
+#  include "mlx.h"
+# else
+#  include <mlx.h>
+# endif
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"

@@ -6,9 +6,36 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/02 17:25:27 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/03 12:09:10 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+################################################################################
+#                               PARAMS & COLORS                                #
+################################################################################
+OS			=  $(shell uname -s)
+
+ifneq (,$(findstring xterm,${TERM}))
+	BLACK        := $(shell tput -Txterm setaf 0)
+	RED          := $(shell tput -Txterm setaf 1)
+	GREEN        := $(shell tput -Txterm setaf 2)
+	YELLOW       := $(shell tput -Txterm setaf 3)
+	LIGHTPURPLE  := $(shell tput -Txterm setaf 4)
+	PURPLE       := $(shell tput -Txterm setaf 5)
+	BLUE         := $(shell tput -Txterm setaf 6)
+	WHITE        := $(shell tput -Txterm setaf 7)
+	RESET		 := $(shell tput -Txterm sgr0)
+else
+	BLACK        := ""
+	RED          := ""
+	GREEN        := ""
+	YELLOW       := ""
+	LIGHTPURPLE  := ""
+	PURPLE       := ""
+	BLUE         := ""
+	WHITE        := ""
+	RESET        := ""
+endif
 
 ################################################################################
 #                                 COMMANDS                                     #
@@ -48,22 +75,33 @@ BOBJS		= $(BSRCS:.c=.o)
 #                           EXECUTABLES & LIBRARIES                            #
 ################################################################################
 NAME		= so_long
-LIB			= libft.a
-LIBHEADER	= libft.h
+LFT			= libft.a
+
+ifeq ($(OS), Linux)
+	LMLX	= libmlx_Linux.a
+else
+	LMLX	= 
+endif
 
 ################################################################################
 #                                 DIRECTORIES                                  #
 ################################################################################
-LIBDIR		= libft/
+LFTDIR		= libft/
+LMLXDIR		= minilibx-linux/
 HEADERS		= includes/mandatory/
 
 ################################################################################
 #                                     FLAGS                                    #
 ################################################################################
 CFLAGS		= -Wall -Wextra -Werror
-MLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
-LIBFLAGS	= -L. -lft
+LFTFLAGS	= -L. -lft
 BFLAGS		=
+
+ifeq ($(OS), Linux)
+	LMLXFLAGS	= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -DLINUX
+else
+	LMLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
+endif
 
 ifeq ($(DEBUG), true)
 	CFLAGS	+= -fsanitize=address -g3 -O0
@@ -73,32 +111,50 @@ endif
 #                                    RULES                                     #
 ################################################################################
 .c.o:
-			$(CC) $(CFLAGS) $(BFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) -I$(LIBDIR)
+			@$(CC) $(CFLAGS) $(BFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) \
+				-I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
 
-$(NAME):	$(LIB) $(OBJS)
-			$(CC) $(CFLAGS) $(MLXFLAGS) $(LIBFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS)
+$(NAME):	$(LMLX) $(LFT) $(OBJS)
+			@echo -n "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME)]$(RESET)" 
+			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(OBJS) -o $(NAME) \
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+			@echo " : $(GREEN)OK !$(RESET)"
 
 all:		$(NAME)
 
 bonus:		HEADERS = includes/bonus/
 bonus:		BFLAGS = -DBONUS
-bonus:		$(LIB) $(BOBJS) #ne recompile pas les commons avec le bon .h > A gerer
+bonus:		$(LMLX) $(LFT) $(BOBJS)
+			@echo -n "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
 			@touch bonus
-			$(CC) $(CFLAGS) $(MLXFLAGS) $(LIBFLAGS) $(BOBJS) -o $(NAME) -I$(BHEADERS)
+			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(BOBJS) -o $(NAME) \
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+			@echo " : $(GREEN)OK !$(RESET)"
 
 clean:
-			$(RM) $(OBJS) $(BOBJS) $(LIB) bonus
+			@echo -n "$(BLUE)Cleaning $(RESET) $(YELLOW)[objects & libraries]$(RESET)"
+			$(RM) $(OBJS) $(BOBJS) $(LFT) $(LMLX) bonus
+			@echo " : $(GREEN)OK !$(RESET)"
 
 fclean:		clean
+			@echo -n "$(BLUE)Cleaning $(RESET) $(YELLOW)[executable(s)]$(RESET)"
 			$(RM) $(NAME)
+			@echo " : $(GREEN)OK !$(RESET)"
 
 re:			fclean all
 
-$(LIB):	
-			@echo ">> Compiling libft..."
-			@make -s -C $(LIBDIR)
-			@make clean -s -C $(LIBDIR)
-			@echo ">> libft compiled!"
-			@mv $(LIBDIR)$(LIB) .
+$(LFT):	
+			@echo -n "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LFT)]$(RESET)"
+			@make -s -C $(LFTDIR)
+			@make clean -s -C $(LFTDIR)
+			@mv $(LFTDIR)$(LFT) .
+			@echo " : $(GREEN)OK !$(RESET)"
+
+$(LMLX):		
+			@echo -n "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LMLX)]$(RESET)"
+			@make -s -C $(LMLXDIR)
+			@mv $(LMLXDIR)$(LMLX) .
+			@make clean -s -C $(LMLXDIR)
+			@echo " : $(GREEN)OK !$(RESET)"
 
 .PHONY:		all clean fclean c.o re

@@ -6,11 +6,10 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 15:30:35 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 23:40:43 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #ifdef BONUS
 # include "so_long_bonus.h"
 #else

@@ -6,11 +6,10 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 15:45:09 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/02 23:40:26 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long_bonus.h"
 #define ESC 53
 #define W 13
