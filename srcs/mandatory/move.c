@@ -6,13 +6,13 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/03 10:43:28 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 11:49:07 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_get_next_position(t_player *p, int move)
+void	ft_get_next_position(t_sprite *p, int move)
 {
 	p->next_x = p->x;
 	p->next_y = p->y;
@@ -26,7 +26,7 @@ void	ft_get_next_position(t_player *p, int move)
 		++(p->next_y);
 }
 
-char	ft_get_next_tile(t_player p, int move, t_map *map)
+char	ft_get_next_tile(t_sprite p, int move, t_map *map)
 {
 	if (move == UP)
 		return (map->map[p.y - 1][p.x]);
@@ -39,13 +39,13 @@ char	ft_get_next_tile(t_player p, int move, t_map *map)
 	return ('X');
 }
 
-void	ft_do_move(t_player p, int move, t_param *param)
+void	ft_do_move(t_sprite p, int move, t_param *param)
 {
 	ft_get_next_position(&p, move);
-	ft_draw_image(param, param->map->img[0], p.x, p.y);
+	ft_draw_image(param, param->img[0], p.x, p.y);
 	if (param->is_on_exit == 1)
 	{
-		ft_draw_image(param, param->map->img[3], p.x, p.y);
+		ft_draw_image(param, param->img[3], p.x, p.y);
 		param->map->map[p.y][p.x] = 'E';
 	}
 	else
@@ -54,17 +54,17 @@ void	ft_do_move(t_player p, int move, t_param *param)
 		param->is_on_exit = 1;
 	else
 	{
-		ft_draw_image(param, param->map->img[0], p.next_x, p.next_y);
+		ft_draw_image(param, param->img[0], p.next_x, p.next_y);
 		param->is_on_exit = 0;
 	}
-	ft_draw_image(param, param->map->img[4], p.next_x, p.next_y);
+	ft_draw_image(param, param->img[4], p.next_x, p.next_y);
 	param->map->map[p.next_y][p.next_x] = 'P';
-	++(param->nb_moves);
+	++(param->curr_moves);
 }
 
 int	ft_mover(t_param *param, int move)
 {
-	t_player	p;
+	t_sprite	p;
 	char		next;
 
 	p = ft_get_player_pos(param->map);
@@ -74,11 +74,11 @@ int	ft_mover(t_param *param, int move)
 	if (next == 'C')
 	{
 		ft_do_move(p, move, param);
-		++(param->nb_items);
+		++(param->curr_items);
 	}
 	if (next == 'E')
 	{
-		if (param->nb_items == param->map->total_items)
+		if (param->curr_items == param->total_items)
 		{
 			ft_do_move(p, move, param);
 			return (1);

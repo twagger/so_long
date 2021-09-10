@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/03 10:17:03 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:13:14 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,28 @@ typedef struct s_map
 	char	**map;
 	int		rows;
 	int		cols;
-	int		total_items;
-	void	**img;
 }			t_map;
 
-typedef struct s_player
+typedef struct s_param
+{
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	void	**img;
+	int		total_items;
+	int		curr_items;
+	int		curr_moves;
+	int		is_on_exit;
+	t_data	*frame;
+}			t_param;
+
+typedef struct s_sprite
 {
 	int	x;
 	int	y;
 	int	next_x;
 	int	next_y;
-}		t_player;
+}		t_sprite;
 
 typedef struct s_data
 {
@@ -60,17 +71,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }			t_data;
-
-typedef struct s_param
-{
-	void	*mlx;
-	void	*win;
-	t_map	*map;
-	int		nb_items;
-	int		nb_moves;
-	int		is_on_exit;
-	t_data	*frame;
-}			t_param;
 
 /*
 ** Commons
@@ -85,9 +85,9 @@ int			create_trgb(int t, int r, int g, int b);
 */
 
 int			ft_map_controler(int fd, int *rows);
-int			ft_create_map(int fd, t_map *map, int rows);
-void		ft_draw_map(t_map *map, void *mlx, void *win);
-int			ft_free_map(t_map *map, int ret_code, void *mlx);
+int			ft_create_map(int fd, t_map **map, int rows);
+void		ft_draw_map(t_map *map, t_param *param, void *mlx, void *win);
+int			ft_free_map(t_map *map, int ret_code);
 
 /*
 ** Hooks
@@ -95,14 +95,14 @@ int			ft_free_map(t_map *map, int ret_code, void *mlx);
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
-void		ft_init_param(t_param *param, void *mlx, void *win, t_map *map);
+int			ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 
 /*
 ** Images
 */
 
 char		*ft_get_path(int c);
-int			ft_init_imgs(t_map *map, void *mlx);
+int			ft_init_imgs(t_param *param, void *mlx);
 void		ft_draw_image(t_param *param, void *img, int x, int y);
 
 /*
@@ -110,8 +110,8 @@ void		ft_draw_image(t_param *param, void *img, int x, int y);
 */
 
 int			ft_move(t_param *param, int move);
-t_player	ft_get_player_pos(t_map *map);
-void		ft_animate_move(t_player p, int dir, t_param *param);
+t_sprite	ft_get_player_pos(t_map *map);
+void		ft_animate_move(t_sprite p, int dir, t_param *param);
 
 /*
 ** Info bar

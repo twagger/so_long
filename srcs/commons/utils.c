@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commons.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 11:56:15 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 11:39:39 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 #else
 # include "so_long.h"
 #endif
+
+int ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
+{
+	if (map)
+		ft_free_map(map, 0);
+	if (param)
+		ft_free_param(param, mlx, 0);
+	return (ret_code);
+}
 
 int	ft_free_and_return(char **to_free, int to_return)
 {

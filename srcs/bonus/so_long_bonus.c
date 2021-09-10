@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:42:35 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 23:40:23 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 11:09:44 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_is_ber_file(char *map_file)
 	}
 }
 
-int	ft_file_to_array(char *map_file, t_map *map, int rows)
+int	ft_file_to_array(char *map_file, t_map **map, int rows)
 {
 	int	fd;
 
@@ -70,32 +70,32 @@ int	ft_game_loop(t_map *map)
 {
 	void	*mlx;
 	void	*win;
-	t_param	param;
+	t_param	*param;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, map->cols * SSIZE, \
 		(map->rows * SSIZE) + TOP_GAP, "so long");
-	if (ft_init_imgs(map, mlx) == ERROR)
-		return (ft_free_map(map, ERROR, mlx));
-	ft_draw_map(map, mlx, win);
-	ft_init_param(&param, mlx, win, map);
+	param = NULL;
+	if (ft_init_param(&param, mlx, win, map) == ERROR)
+		return (ft_free_map(map, ERROR));
+	ft_draw_map(map, param, mlx, win);
 	if (ft_init_infobar(&param) == ERROR)
-		return (ft_free_map(map, ERROR, mlx));
+		return (ft_free_map(map, ERROR));
 	if (ft_update_move_info(&param) == ERROR)
-		return (ft_free_map(map, ERROR, mlx));
+		return (ft_free_map(map, ERROR));
 	if (ft_init_frame(&param) == ERROR)
-		return (ft_free_map(map, ERROR, mlx));
+		return (ft_free_map(map, ERROR));
 	mlx_hook(win, 2, 1L << 0, ft_handle_key, &param);
 	mlx_hook(win, 17, 0L, ft_handle_close, &param);
 	mlx_loop(mlx);
-	return (ft_free_map(map, 0, mlx));
+	return (ft_free_map(map, 0));
 }
 
 int	main(int ac, char **av)
 {
 	int		rows;
 	int		map_check;
-	t_map	map;
+	t_map	*map;
 
 	rows = 1;
 	if (ac != 2)
@@ -107,9 +107,10 @@ int	main(int ac, char **av)
 		return (ft_exit_w_message("Error", strerror(errno), 2, 1));
 	else if (!map_check)
 		return (ft_exit_w_message("Error", "MAP is not valid", 2, 1));
+	map = NULL;
 	if (ft_file_to_array(av[1], &map, rows) == ERROR)
 		return (ft_exit_w_message("Error", NULL, 2, 1));
-	if (ft_game_loop(&map) == ERROR)
+	if (ft_game_loop(map) == ERROR)
 		return (ft_exit_w_message("Error", NULL, 2, 1));
 	return (0);
 }

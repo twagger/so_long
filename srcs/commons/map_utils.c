@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 23:40:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:24:12 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "so_long.h"
 #endif
 
-int	ft_free_map(t_map *map, int ret_code, void *mlx)
+int	ft_free_map(t_map *map, int ret_code)
 {
 	int	i;
 
@@ -28,18 +28,7 @@ int	ft_free_map(t_map *map, int ret_code, void *mlx)
 			while (++i < map->rows)
 				free(map->map[i]);
 		}
-		if (map->img)
-		{
-			i = -1;
-			while (++i < NBSPRITES)
-			{
-				if (mlx)
-					mlx_destroy_image(mlx, map->img[i]);
-				else
-					free(map->img[i]);
-			}
-			free(map->img);
-		}
+		free(map);
 	}
 	return (ret_code);
 }
@@ -56,12 +45,10 @@ int	ft_init_map(t_map *map, int rows)
 		map->map[i] = NULL;
 	map->rows = rows;
 	map->cols = 0;
-	map->total_items = 0;
-	map->img = NULL;
 	return (0);
 }
 
-void	ft_draw_map(t_map *map, void *mlx, void *win)
+void	ft_draw_map(t_map *map, t_param *param, void *mlx, void *win)
 {
 	int	col;
 	int	row;
@@ -78,9 +65,9 @@ void	ft_draw_map(t_map *map, void *mlx, void *win)
 		while (++col < map->cols)
 		{
 			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
-			mlx_put_image_to_window(mlx, win, map->img[0], curr_x, curr_y);
+			mlx_put_image_to_window(mlx, win, param->img[0], curr_x, curr_y);
 			if (ft_strchr(STATIC, map->map[row][col]))
-				mlx_put_image_to_window(mlx, win, map->img[img_i], \
+				mlx_put_image_to_window(mlx, win, param->img[img_i], \
 					curr_x, curr_y);
 			curr_x += SSIZE;
 		}
@@ -92,12 +79,6 @@ void	ft_add_line(t_map *map, char *line)
 {
 	int	i;
 
-	i = -1;
-	while (line[++i])
-	{
-		if (line[i] == 'C')
-			++(map->total_items);
-	}
 	i = -1;
 	while (++i < map->rows)
 	{
@@ -111,24 +92,27 @@ void	ft_add_line(t_map *map, char *line)
 		map->cols = ft_strlen(line);
 }
 
-int	ft_create_map(int fd, t_map *map, int rows)
+int	ft_create_map(int fd, t_map **map, int rows)
 {
 	int		ret;
 	char	*line;
 
-	if (ft_init_map(map, rows) == ERROR)
+	*map = (t_map *)malloc(sizeof(**map));
+	if (!(*map))
+		return (ERROR);
+	if (ft_init_map(*map, rows) == ERROR)
 		return (ERROR);
 	line = NULL;
 	ret = get_next_line(fd, &line);
 	while (ret > 0)
 	{
-		ft_add_line(map, line);
+		ft_add_line(*map, line);
 		line = NULL;
 		ret = get_next_line(fd, &line);
 	}
 	if (ret == ERROR)
-		return (ft_free_map(map, ERROR, NULL));
+		return (ft_free_map(*map, ERROR));
 	else
-		ft_add_line(map, line);
+		ft_add_line(*map, line);
 	return (0);
 }

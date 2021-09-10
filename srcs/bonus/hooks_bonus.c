@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 23:40:26 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 10:41:36 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #define A 0
 #define D 2
 #define KEYMAP "321----------0"
-
-void	ft_init_param(t_param *param, void *mlx, void *win, t_map *map)
-{
-	param->mlx = mlx;
-	param->win = win;
-	param->map = map;
-	param->nb_items = 0;
-	param->nb_moves = 0;
-}
 
 int	ft_handle_key(int key, void *param)
 {
