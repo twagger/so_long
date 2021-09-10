@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/03 12:09:10 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/10 09:31:38 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,14 +93,14 @@ HEADERS		= includes/mandatory/
 ################################################################################
 #                                     FLAGS                                    #
 ################################################################################
-CFLAGS		= -Wall -Wextra -Werror
-LFTFLAGS	= -L. -lft
-BFLAGS		=
+CFLAGS		:= -Wall -Wextra -Werror
+LFTFLAGS	:= -L. -lft
+BFLAGS		:=
 
 ifeq ($(OS), Linux)
-	LMLXFLAGS	= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -DLINUX
+	LMLXFLAGS	:= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -DLINUX
 else
-	LMLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
+	LMLXFLAGS	:= -lmlx -framework OpenGL -framework AppKit
 endif
 
 ifeq ($(DEBUG), true)
@@ -112,12 +112,12 @@ endif
 ################################################################################
 .c.o:
 			@$(CC) $(CFLAGS) $(BFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) \
-				-I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+				-I$(LFTDIR) -I$(LMLXDIR)
 
 $(NAME):	$(LMLX) $(LFT) $(OBJS)
-			@echo -n "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME)]$(RESET)" 
+			@printf  "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME)]$(RESET)" 
 			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(OBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 all:		$(NAME)
@@ -125,33 +125,33 @@ all:		$(NAME)
 bonus:		HEADERS = includes/bonus/
 bonus:		BFLAGS = -DBONUS
 bonus:		$(LMLX) $(LFT) $(BOBJS)
-			@echo -n "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
+			@$(ECHON) "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
 			@touch bonus
 			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(BOBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 clean:
-			@echo -n "$(BLUE)Cleaning $(RESET) $(YELLOW)[objects & libraries]$(RESET)"
-			$(RM) $(OBJS) $(BOBJS) $(LFT) $(LMLX) bonus
+			@printf "$(BLUE)Cleaning $(RESET) $(YELLOW)[objects & libraries]$(RESET)"
+			@$(RM) $(OBJS) $(BOBJS) $(LFT) $(LMLX) bonus
 			@echo " : $(GREEN)OK !$(RESET)"
 
 fclean:		clean
-			@echo -n "$(BLUE)Cleaning $(RESET) $(YELLOW)[executable(s)]$(RESET)"
-			$(RM) $(NAME)
+			@printf "$(BLUE)Cleaning $(RESET) $(YELLOW)[executable(s)]$(RESET)"
+			@$(RM) $(NAME)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 re:			fclean all
 
 $(LFT):	
-			@echo -n "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LFT)]$(RESET)"
+			@printf "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LFT)]$(RESET)"
 			@make -s -C $(LFTDIR)
 			@make clean -s -C $(LFTDIR)
 			@mv $(LFTDIR)$(LFT) .
 			@echo " : $(GREEN)OK !$(RESET)"
 
 $(LMLX):		
-			@echo -n "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LMLX)]$(RESET)"
+			@printf "$(BLUE)Compiling$(RESET) $(YELLOW)[$(LMLX)]$(RESET)"
 			@make -s -C $(LMLXDIR)
 			@mv $(LMLXDIR)$(LMLX) .
 			@make clean -s -C $(LMLXDIR)
