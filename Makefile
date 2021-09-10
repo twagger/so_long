@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/10 09:31:38 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/10 10:09:09 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ all:		$(NAME)
 bonus:		HEADERS = includes/bonus/
 bonus:		BFLAGS = -DBONUS
 bonus:		$(LMLX) $(LFT) $(BOBJS)
-			@$(ECHON) "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
+			@printf "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
 			@touch bonus
 			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(BOBJS) -o $(NAME) \
 				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR)
