@@ -8,7 +8,7 @@
 maps/
 so_long
 resources
-bonus
+./bonus
 
 # Debug files
 *.dSYM/
