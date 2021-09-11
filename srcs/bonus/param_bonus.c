@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   param.c                                            :+:      :+:    :+:   */
+/*   param_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:05:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:29:34 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef BONUS
 # include "so_long_bonus.h"
-#else
-# include "so_long.h"
-#endif
 
 int	ft_count_items(t_map *map, char item)
 {
@@ -110,6 +106,7 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->curr_moves = 0;
 	(*param)->total_items = ft_count_items(map, 'C');
 	(*param)->is_on_exit = 0;
+	(*param)->frames = 0;
 	(*param)->playground = ft_init_frame(*param);
 	if (!(*param)->playground)
 		return (ERROR);

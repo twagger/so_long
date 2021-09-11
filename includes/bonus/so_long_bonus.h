@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:06:03 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:32:22 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+typedef struct s_move
+{
+	void	**img;
+	int		nb_move;
+	int		x;
+	int		y;
+	int		next_x;
+	int		next_y;
+}			t_move;
+
 typedef struct s_param
 {
 	void	*mlx;
@@ -60,6 +70,8 @@ typedef struct s_param
 	int		curr_moves;
 	int		is_on_exit;
 	t_data	*playground;
+	int		frames;
+	t_move	move;
 }			t_param;
 
 typedef struct s_sprite

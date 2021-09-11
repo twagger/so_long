@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:00:35 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:24:08 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ int	ft_handle_close(void *param)
 	return (0);
 }
 
-int	ft_render_next_frame(void *mlx, void *param)
+int	ft_render_next_frame(void *param)
 {
-	ft_putstr_fd("toto\n", 1);
-	mlx_put_image_to_window(mlx, ((t_param *)param)->win, \
+	if (((t_param *)param)->frames > 1000)
+		((t_param *)param)->frames = 0;
+	++(((t_param *)param)->frames);
+	// Checker le param pour voir si on a un move a faire, si oui, move et decrementer le nb de movements
+	mlx_put_image_to_window(((t_param *)param)->mlx, ((t_param *)param)->win, \
 		((t_param *)param)->playground->img, 0, TOP_GAP);
 	return (0);
 }

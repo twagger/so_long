@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/11 14:21:15 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/11 15:28:59 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS		= srcs/commons/map_controler.c \
 			  srcs/commons/param.c \
 			  srcs/commons/drawing.c \
 			  srcs/mandatory/so_long.c \
+			  srcs/bonus/param.c \
 			  srcs/mandatory/hooks.c \
 			  srcs/mandatory/move.c \
 
@@ -62,6 +63,7 @@ BSRCS		= srcs/commons/map_controler.c \
 			  srcs/commons/param.c \
 			  srcs/commons/drawing.c \
 			  srcs/bonus/so_long_bonus.c \
+			  srcs/bonus/param_bonus.c \
 			  srcs/bonus/hooks_bonus.c \
 			  srcs/bonus/move_bonus.c \
 			  srcs/bonus/infobar_bonus.c			  
