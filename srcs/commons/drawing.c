@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:28:51 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:02:05 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_data	*ft_init_frame(t_param *prm)
 	return (frame);
 }
 
-void	ft_draw_playground(t_map *map, t_param *param, void *mlx, void *win)
+void	ft_draw_playground(t_map *map, t_param *param)
 {
 	int	col;
 	int	row;
@@ -106,5 +106,4 @@ void	ft_draw_playground(t_map *map, t_param *param, void *mlx, void *win)
 		}
 		curr_y += SSIZE;
 	}
-	mlx_put_image_to_window(mlx, win, param->playground->img, 0, TOP_GAP);
 }

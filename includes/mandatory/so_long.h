@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:08:39 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:05:56 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int			ft_free_map(t_map *map, int ret_code);
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
+int			ft_render_next_frame(void *param);
 
 /*
 ** Images
@@ -117,7 +118,6 @@ t_data		*ft_init_frame(t_param *prm);
 void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void		ft_put_object(void *img, t_data *frame, int x, int y);
 void		ft_put_sprite(void *img, t_data *frame, int x, int y);
-void		ft_draw_playground(t_map *map, t_param *param, void *mlx, \
-				void *win);
+void		ft_draw_playground(t_map *map, t_param *param);
 
 #endif

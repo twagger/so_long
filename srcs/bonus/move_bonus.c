@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:18:46 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:57:18 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,23 @@ char	ft_get_next_tile(t_sprite p, int move, t_map *map)
 	if (move == DOWN)
 		return (map->map[p.y + 1][p.x]);
 	return ('X');
+}
+
+void	ft_do_move_old(t_sprite p, int move, t_param *param)
+{
+	int mv;
+
+	ft_get_next_position(&p, move);
+	mv = 0;
+	while (mv < SSIZE)
+	{
+		ft_put_sprite(param->img[0], param->playground, p.x * SSIZE, p.y * SSIZE);
+		ft_put_sprite(param->img[0], param->playground, p.next_x * SSIZE, p.next_y * SSIZE);
+		ft_put_sprite(param->img[4], param->playground, (p.x * SSIZE) + mv, p.y * SSIZE);
+		++mv;
+	}
+	param->map->map[p.next_y][p.next_x] = 'P';
+	++(param->curr_moves);
 }
 
 void	ft_do_move(t_sprite p, int move, t_param *param)
