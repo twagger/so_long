@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:21:16 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:50:59 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,32 @@ t_data	*ft_init_frame(t_param *prm)
 			ft_img_pixel_put(frame, x, y, 0xFF000000);
 	}
 	return (frame);
+}
+
+void	ft_draw_playground(t_map *map, t_param *param, void *mlx, void *win)
+{
+	int	col;
+	int	row;
+	int	img_i;
+	int	curr_x;
+	int	curr_y;
+
+	curr_y = TOP_GAP;
+	row = -1;
+	while (++row < map->rows)
+	{
+		col = -1;
+		curr_x = 0;
+		while (++col < map->cols)
+		{
+			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
+			ft_put_sprite(param->img[0], param->playground, \
+				curr_x, curr_y);
+			ft_put_sprite(param->img[img_i], param->playground, \
+					curr_x, curr_y);
+			curr_x += SSIZE;
+		}
+		curr_y += SSIZE;
+	}
+	mlx_put_image_to_window(mlx, win, param->playground->img, 0, TOP_GAP);
 }

@@ -6,11 +6,36 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/10 11:49:07 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:00:55 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_sprite	ft_get_player_pos(t_map *map)
+{
+	int			i;
+	int			j;
+	t_sprite	player;
+
+	i = -1;
+	while (++i < map->rows)
+	{
+		j = -1;
+		while (++j < map->cols)
+		{
+			if (map->map[i][j] == 'P')
+			{
+				player.x = j;
+				player.y = i;
+				return (player);
+			}
+		}
+	}
+	player.x = 0;
+	player.y = TOP_GAP * SSIZE;
+	return (player);
+}
 
 void	ft_get_next_position(t_sprite *p, int move)
 {
@@ -42,10 +67,11 @@ char	ft_get_next_tile(t_sprite p, int move, t_map *map)
 void	ft_do_move(t_sprite p, int move, t_param *param)
 {
 	ft_get_next_position(&p, move);
-	ft_draw_image(param, param->img[0], p.x, p.y);
+	ft_put_sprite(param->img[0], param->playground, p.x * SSIZE, p.y * SSIZE);
 	if (param->is_on_exit == 1)
 	{
-		ft_draw_image(param, param->img[3], p.x, p.y);
+		ft_put_sprite(param->img[3], param->playground, \
+			p.x * SSIZE, p.y * SSIZE);
 		param->map->map[p.y][p.x] = 'E';
 	}
 	else
@@ -54,11 +80,15 @@ void	ft_do_move(t_sprite p, int move, t_param *param)
 		param->is_on_exit = 1;
 	else
 	{
-		ft_draw_image(param, param->img[0], p.next_x, p.next_y);
+		ft_put_sprite(param->img[0], param->playground, \
+			p.next_x * SSIZE, p.next_y * SSIZE);
 		param->is_on_exit = 0;
 	}
-	ft_draw_image(param, param->img[4], p.next_x, p.next_y);
+	ft_put_sprite(param->img[4], param->playground, \
+		p.next_x * SSIZE, p.next_y * SSIZE);
 	param->map->map[p.next_y][p.next_x] = 'P';
+	mlx_put_image_to_window(param->mlx, param->win, \
+		param->playground->img, 0, TOP_GAP);
 	++(param->curr_moves);
 }
 

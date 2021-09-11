@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:29:23 by twagner           #+#    #+#             */
-/*   Updated: 2021/07/24 16:12:42 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:03:13 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_update_bufline(char **bufline)
 	return (0);
 }
 
-static int	ft_return_line(char **line, char **bufline, int	status)
+static int	ft_return_line(char **line, char **bufline, int status)
 {
 	int		nl_index;
 

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:23:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:05:22 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "so_long.h"
 #endif
 
-int ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
+int	ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
 {
 	if (map)
 		ft_free_map(map, 0);

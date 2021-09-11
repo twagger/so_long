@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/11 13:24:12 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/11 13:52:30 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,6 @@ AR			= ar rcs
 SRCS		= srcs/mandatory/so_long.c \
 			  srcs/commons/map_controler.c \
 			  srcs/commons/map.c \
-			  srcs/commons/actions.c \
-			  srcs/commons/image_utils.c \
 			  srcs/commons/utils.c \
 			  srcs/mandatory/hooks.c \
 			  srcs/mandatory/move.c \
@@ -61,7 +59,6 @@ SRCS		= srcs/mandatory/so_long.c \
 BSRCS		= srcs/bonus/so_long_bonus.c \
 			  srcs/commons/map_controler.c \
 			  srcs/commons/map.c \
-			  srcs/commons/actions.c \
 			  srcs/commons/image_utils.c \
 			  srcs/commons/utils.c \
 			  srcs/bonus/hooks_bonus.c \

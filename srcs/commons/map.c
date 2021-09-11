@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:21:54 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:32:08 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,35 +46,6 @@ int	ft_init_map(t_map *map, int rows)
 	map->rows = rows;
 	map->cols = 0;
 	return (0);
-}
-
-void	ft_draw_map(t_map *map, t_param *param, void *mlx, void *win)
-{
-	int	col;
-	int	row;
-	int	img_i;
-	int	curr_x;
-	int	curr_y;
-
-	curr_y = TOP_GAP;
-	row = -1;
-	while (++row < map->rows)
-	{
-		col = -1;
-		curr_x = 0;
-		while (++col < map->cols)
-		{
-			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
-			ft_put_sprite(param->img[0], param->background, \
-				curr_x, curr_y);
-			if (ft_strchr(STATIC, map->map[row][col]))
-				ft_put_sprite(param->img[img_i], param->background, \
-					curr_x, curr_y);
-			curr_x += SSIZE;
-		}
-		curr_y += SSIZE;
-	}
-	mlx_put_image_to_window(mlx, win, param->background->img, 0, TOP_GAP);
 }
 
 void	ft_add_line(t_map *map, char *line)

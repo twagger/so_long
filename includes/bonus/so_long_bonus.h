@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/10 15:19:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:02:32 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_param
 	int		curr_items;
 	int		curr_moves;
 	int		is_on_exit;
-	t_data	*background;
 	t_data	*playground;
 }			t_param;
 
@@ -87,7 +86,6 @@ int			create_trgb(int t, int r, int g, int b);
 
 int			ft_map_controler(int fd, int *rows);
 int			ft_create_map(int fd, t_map **map, int rows);
-void		ft_draw_map(t_map *map, t_param *param, void *mlx, void *win);
 int			ft_free_map(t_map *map, int ret_code);
 
 /*
@@ -129,5 +127,7 @@ t_data		*ft_init_frame(t_param *prm);
 void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void		ft_put_object(void *img, t_data *frame, int x, int y);
 void		ft_put_sprite(void *img, t_data *frame, int x, int y);
+void		ft_draw_playground(t_map *map, t_param *param, void *mlx, \
+				void *win);
 
 #endif

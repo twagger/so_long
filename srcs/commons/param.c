@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:21:20 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:05:06 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_count_items(t_map *map, char item)
 int	ft_free_param(t_param *param, void *mlx, int ret_code)
 {
 	int	i;
-	
+
 	if (param->img)
 	{
 		i = -1;
@@ -52,11 +52,8 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 		}
 		free(param->img);
 	}
-	if (param->background)
-		free(param->background->addr);
 	if (param->playground)
 		free(param->playground->addr);
-	free(param->background);
 	free(param->playground);
 	free(param);
 	return (ret_code);
@@ -113,9 +110,8 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->curr_moves = 0;
 	(*param)->total_items = ft_count_items(map, 'C');
 	(*param)->is_on_exit = 0;
-	(*param)->background = ft_init_frame(*param);
 	(*param)->playground = ft_init_frame(*param);
-	if (!(*param)->background || !(*param)->playground)
+	if (!(*param)->playground)
 		return (ERROR);
 	if (ft_init_imgs(*param, mlx) == ERROR)
 		return (ERROR);
