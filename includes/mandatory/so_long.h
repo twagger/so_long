@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/10 12:16:00 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 14:08:23 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_param
 	int		curr_items;
 	int		curr_moves;
 	int		is_on_exit;
-	t_data	*frame;
+	t_data	*background;
+	t_data	*playground;
 }			t_param;
 
 typedef struct s_sprite
@@ -110,5 +111,14 @@ void		ft_draw_image(t_param *param, void *img, int x, int y);
 
 int			ft_mover(t_param *param, int move);
 t_sprite	ft_get_player_pos(t_map *map);
+
+/*
+** Drawing
+*/
+
+t_data		*ft_init_frame(t_param *prm);
+void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
+void		ft_put_object(void *img, t_data *frame, int x, int y);
+void		ft_put_sprite(void *img, t_data *frame, int x, int y);
 
 #endif

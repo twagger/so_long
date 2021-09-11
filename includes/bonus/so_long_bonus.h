@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/10 12:13:14 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:19:47 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ typedef struct s_map
 	int		cols;
 }			t_map;
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
+
 typedef struct s_param
 {
 	void	*mlx;
@@ -52,7 +61,8 @@ typedef struct s_param
 	int		curr_items;
 	int		curr_moves;
 	int		is_on_exit;
-	t_data	*frame;
+	t_data	*background;
+	t_data	*playground;
 }			t_param;
 
 typedef struct s_sprite
@@ -62,15 +72,6 @@ typedef struct s_sprite
 	int	next_x;
 	int	next_y;
 }		t_sprite;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
 
 /*
 ** Commons
@@ -121,11 +122,12 @@ int			ft_init_infobar(t_param *param);
 int			ft_update_move_info(t_param *prm);
 
 /*
-** Animation
+** Drawing
 */
 
-int			ft_init_frame(t_param *prm);
+t_data		*ft_init_frame(t_param *prm);
 void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void		ft_put_object(void *img, t_data *frame, int x, int y);
+void		ft_put_sprite(void *img, t_data *frame, int x, int y);
 
 #endif
