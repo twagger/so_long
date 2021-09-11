@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:02:32 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:22:30 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"
-# define STATIC "01E"
-# define MOVABLE "CP"
 # define WALL '1'
 # define NBSPRITES 17
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
@@ -79,6 +77,9 @@ typedef struct s_sprite
 int			ft_free_and_return(char **to_free, int to_return);
 int			ft_exit_w_message(char *message, char *message2, int fd, int code);
 int			create_trgb(int t, int r, int g, int b);
+int			ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
+int			ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
+int			ft_free_param(t_param *param, void *mlx, int ret_code);
 
 /*
 ** Map
@@ -94,7 +95,6 @@ int			ft_free_map(t_map *map, int ret_code);
 
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
-int			ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 
 /*
 ** Images
@@ -108,9 +108,8 @@ void		ft_draw_image(t_param *param, void *img, int x, int y);
 ** Actions
 */
 
-int			ft_move(t_param *param, int move);
+int			ft_mover(t_param *param, int move);
 t_sprite	ft_get_player_pos(t_map *map);
-void		ft_animate_move(t_sprite p, int dir, t_param *param);
 
 /*
 ** Info bar

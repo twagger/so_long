@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:56:53 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/02 23:40:25 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:13:38 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	ft_update_move_info(t_param *prm)
 		return (ERROR);
 	if (prm->map->cols > 5)
 		mlx_string_put(prm->mlx, prm->win, 145, 2, TXT_COLOR, \
-			ft_itoa(prm->nb_moves));
+			ft_itoa(prm->curr_moves));
 	else
 		mlx_string_put(prm->mlx, prm->win, 65, 2, TXT_COLOR, \
-			ft_itoa(prm->nb_moves));
+			ft_itoa(prm->curr_moves));
 	return (0);
 }

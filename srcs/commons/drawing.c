@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:50:59 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:28:51 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_draw_playground(t_map *map, t_param *param, void *mlx, void *win)
 	int	curr_x;
 	int	curr_y;
 
-	curr_y = TOP_GAP;
+	curr_y = 0;
 	row = -1;
 	while (++row < map->rows)
 	{

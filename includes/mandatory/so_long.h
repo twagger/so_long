@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:02:38 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:08:39 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include "libft.h"
 # define ERROR -1
 # define AUTHORIZED "01CEP"
-# define STATIC "01E"
-# define MOVABLE "CP"
 # define WALL '1'
 # define NBSPRITES 5
 # define SPRITES "0001COEXPL"
