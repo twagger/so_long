@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 09:55:31 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 11:14:28 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ t_sprite	ft_get_player_pos(t_map *map)
 	return (player);
 }
 
-void	ft_get_next_position(t_sprite *p, int move)
+void	ft_get_next_position(t_sprite *p, int move, char next_tile)
 {
 	p->next_x = p->x;
 	p->next_y = p->y;
+	if (next_tile == '1')
+		return ;
 	if (move == UP)
 		--(p->next_y);
 	if (move == RIGHT)
@@ -70,9 +72,9 @@ int	ft_calculate_sprite_pos(int curr, int next, int n)
 		return (curr * SSIZE);
 	if (next > curr)
 		return ((((next * SSIZE) - (curr * SSIZE)) / NBMOVES) \
-			* (NBMOVES - n) + (curr * SSIZE));
+			* (NBMOVES - n + 1) + (curr * SSIZE));
 	if (curr > next)
 		return ((curr * SSIZE) - ((((curr * SSIZE) - (next * SSIZE)) \
-			/ NBMOVES) * (NBMOVES - n)));
+			/ NBMOVES) * (NBMOVES - n + 1)));
 	return (-1);
 }

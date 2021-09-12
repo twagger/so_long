@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 09:56:28 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 10:49:33 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->frames = 0;
 	(*param)->playground = ft_init_frame(*param);
 	(*param)->move.nb_move = 0;
-	(*param)->move.next_img = 0;
+	(*param)->move.next_img = 2;
 	(*param)->move.from_exit = 0;
 	(*param)->move.to_exit = 0;
 	(*param)->keyblock = 0;

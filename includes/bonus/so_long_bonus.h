@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 09:55:28 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 11:08:16 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define RIGHT 1
 # define DOWN 2
 # define LEFT 3
-# define NBMOVES 5
+# define NBMOVES 8
 
 typedef struct s_map
 {
@@ -131,7 +131,7 @@ void		ft_do_move(t_param *param);
 t_sprite	ft_get_player_pos(t_map *map);
 int			ft_calculate_sprite_pos(int curr, int next, int n);
 char		ft_get_next_tile(t_sprite p, int move, t_map *map);
-void		ft_get_next_position(t_sprite *p, int move);
+void		ft_get_next_position(t_sprite *p, int move, char next_tile);
 
 /*
 ** Info bar

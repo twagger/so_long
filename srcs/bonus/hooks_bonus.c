@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 09:43:26 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 11:00:03 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_render_next_frame(void *param)
 	if (((t_param *)param)->frames > 1000)
 		((t_param *)param)->frames = 0;
 	++(((t_param *)param)->frames);
-	if (((t_param *)param)->frames % 4 == 0)
+	if (((t_param *)param)->frames % 3 == 0)
 	{
 		if (((t_param *)param)->move.nb_move > 0)
 			ft_do_move((t_param *)param);

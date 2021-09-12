@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/12 09:55:43 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/12 11:03:36 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS		= srcs/commons/map_controler.c \
 			  srcs/commons/utils.c \
 			  srcs/commons/drawing.c \
 			  srcs/mandatory/so_long.c \
-			  srcs/bonus/param.c \
+			  srcs/mandatory/param.c \
 			  srcs/mandatory/hooks.c \
 			  srcs/mandatory/move.c \
 
