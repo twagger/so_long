@@ -6,11 +6,11 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:29:34 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 09:56:28 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long_bonus.h"
+#include "so_long_bonus.h"
 
 int	ft_count_items(t_map *map, char item)
 {
@@ -51,6 +51,8 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 	if (param->playground)
 		free(param->playground->addr);
 	free(param->playground);
+	if (param->move.img)
+		free(param->move.img);
 	free(param);
 	return (ret_code);
 }
@@ -108,7 +110,13 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->is_on_exit = 0;
 	(*param)->frames = 0;
 	(*param)->playground = ft_init_frame(*param);
-	if (!(*param)->playground)
+	(*param)->move.nb_move = 0;
+	(*param)->move.next_img = 0;
+	(*param)->move.from_exit = 0;
+	(*param)->move.to_exit = 0;
+	(*param)->keyblock = 0;
+	(*param)->move.img = (void **)malloc(sizeof(void *) * 3);
+	if (!(*param)->playground || !(*param)->move.img)
 		return (ERROR);
 	if (ft_init_imgs(*param, mlx) == ERROR)
 		return (ERROR);

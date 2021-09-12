@@ -6,11 +6,11 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:29:18 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 09:56:35 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 int	ft_count_items(t_map *map, char item)
 {

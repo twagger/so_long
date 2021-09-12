@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:32:22 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 09:55:28 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define RIGHT 1
 # define DOWN 2
 # define LEFT 3
+# define NBMOVES 5
 
 typedef struct s_map
 {
@@ -52,6 +53,9 @@ typedef struct s_data
 typedef struct s_move
 {
 	void	**img;
+	int		next_img;
+	int		from_exit;
+	int		to_exit;
 	int		nb_move;
 	int		x;
 	int		y;
@@ -72,6 +76,7 @@ typedef struct s_param
 	t_data	*playground;
 	int		frames;
 	t_move	move;
+	int		keyblock;
 }			t_param;
 
 typedef struct s_sprite
@@ -122,7 +127,11 @@ void		ft_draw_image(t_param *param, void *img, int x, int y);
 */
 
 int			ft_mover(t_param *param, int move);
+void		ft_do_move(t_param *param);
 t_sprite	ft_get_player_pos(t_map *map);
+int			ft_calculate_sprite_pos(int curr, int next, int n);
+char		ft_get_next_tile(t_sprite p, int move, t_map *map);
+void		ft_get_next_position(t_sprite *p, int move);
 
 /*
 ** Info bar

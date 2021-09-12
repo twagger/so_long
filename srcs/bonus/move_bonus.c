@@ -6,99 +6,79 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 15:33:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 10:00:00 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-t_sprite	ft_get_player_pos(t_map *map)
+void	ft_register_move(t_sprite p, int move, t_param *param)
 {
-	int			i;
-	int			j;
-	t_sprite	player;
+	int	on_exit;
 
-	i = -1;
-	while (++i < map->rows)
-	{
-		j = -1;
-		while (++j < map->cols)
-		{
-			if (map->map[i][j] == 'P')
-			{
-				player.x = j;
-				player.y = i;
-				return (player);
-			}
-		}
-	}
-	player.x = 0;
-	player.y = TOP_GAP * SSIZE;
-	return (player);
-}
-
-void	ft_get_next_position(t_sprite *p, int move)
-{
-	p->next_x = p->x;
-	p->next_y = p->y;
-	if (move == UP)
-		--(p->next_y);
-	if (move == RIGHT)
-		++(p->next_x);
-	if (move == LEFT)
-		--(p->next_x);
-	if (move == DOWN)
-		++(p->next_y);
-}
-
-char	ft_get_next_tile(t_sprite p, int move, t_map *map)
-{
-	if (move == UP)
-		return (map->map[p.y - 1][p.x]);
-	if (move == RIGHT)
-		return (map->map[p.y][p.x + 1]);
-	if (move == LEFT)
-		return (map->map[p.y][p.x - 1]);
-	if (move == DOWN)
-		return (map->map[p.y + 1][p.x]);
-	return ('X');
-}
-
-void	ft_do_move(t_sprite p, int move, t_param *param)
-{
-	// tourner le personnage dans la bonne direction sur place et mettre 
-	//  dans le param le move a faire pour qu'il soit joue par le loop hook
-	//	mettre a jour la carte
-	// 
-	// Creer une nouvelle structure a ratacher au param t_move : img[3], nb_moves, x, y, next_x, next_y
-}
-
-void	ft_do_move_old(t_sprite p, int move, t_param *param)
-{
+	on_exit = 0;
+	param->move.nb_move = NBMOVES;
+	param->move.x = p.x;
+	param->move.y = p.y;
 	ft_get_next_position(&p, move);
-	ft_put_sprite(param->img[0], param->playground, p.x * SSIZE, p.y * SSIZE);
+	param->move.next_x = p.next_x;
+	param->move.next_y = p.next_y;
+	param->move.img[0] = param->img[(move * 3) + 5];
+	param->move.img[1] = param->img[(move * 3) + 6];
+	param->move.img[2] = param->img[(move * 3) + 7];
 	if (param->is_on_exit == 1)
-	{
-		ft_put_sprite(param->img[3], param->playground, \
-			p.x * SSIZE, p.y * SSIZE);
 		param->map->map[p.y][p.x] = 'E';
-	}
 	else
 		param->map->map[p.y][p.x] = '0';
+	param->move.from_exit = param->is_on_exit;
 	if (param->map->map[p.next_y][p.next_x] == 'E')
-		param->is_on_exit = 1;
+		on_exit = 1;
+	param->is_on_exit = on_exit;
+	param->move.to_exit = on_exit ;
+	param->map->map[p.next_y][p.next_x] = 'P';
+	++(param->curr_moves);
+}
+
+void	ft_erase_move_zone(t_param *param)
+{
+	ft_put_sprite(param->img[0], param->playground, \
+		param->move.x * SSIZE, param->move.y * SSIZE);
+	ft_put_sprite(param->img[0], param->playground, \
+		param->move.next_x * SSIZE, param->move.next_y * SSIZE);
+	if (param->move.from_exit)
+		ft_put_sprite(param->img[3], param->playground, \
+			param->move.x * SSIZE, param->move.y * SSIZE);
+	if (param->move.to_exit)
+		ft_put_sprite(param->img[3], param->playground, \
+			param->move.next_x * SSIZE, param->move.next_y * SSIZE);
+}
+
+void	ft_do_move(t_param *param)
+{
+	int	x;
+	int	y;
+
+	if (param->move.nb_move == NBMOVES)
+		param->keyblock = 1;
+	ft_erase_move_zone(param);
+	if (param->move.nb_move == 1)
+		ft_put_sprite(param->move.img[1], param->playground, \
+			param->move.next_x * SSIZE, param->move.next_y * SSIZE);
 	else
 	{
-		ft_put_sprite(param->img[0], param->playground, \
-			p.next_x * SSIZE, p.next_y * SSIZE);
-		param->is_on_exit = 0;
+		x = ft_calculate_sprite_pos(param->move.x, param->move.next_x, \
+			param->move.nb_move);
+		y = ft_calculate_sprite_pos(param->move.y, param->move.next_y, \
+			param->move.nb_move);
+		ft_put_sprite(param->move.img[param->move.next_img], \
+			param->playground, x, y);
 	}
-	ft_put_sprite(param->img[4], param->playground, \
-		p.next_x * SSIZE, p.next_y * SSIZE);
-	param->map->map[p.next_y][p.next_x] = 'P';
-	mlx_put_image_to_window(param->mlx, param->win, \
-		param->playground->img, 0, TOP_GAP);
-	++(param->curr_moves);
+	++(param->move.next_img);
+	if (param->move.next_img > 2)
+		param->move.next_img = 0;
+	--(param->move.nb_move);
+	if (param->move.nb_move == 0)
+		param->keyblock = 0;
 }
 
 int	ft_mover(t_param *param, int move)
@@ -109,21 +89,21 @@ int	ft_mover(t_param *param, int move)
 	p = ft_get_player_pos(param->map);
 	next = ft_get_next_tile(p, move, param->map);
 	if (next == '0')
-		ft_do_move(p, move, param);
+		ft_register_move(p, move, param);
 	if (next == 'C')
 	{
-		ft_do_move(p, move, param);
+		ft_register_move(p, move, param);
 		++(param->curr_items);
 	}
 	if (next == 'E')
 	{
 		if (param->curr_items == param->total_items)
 		{
-			ft_do_move(p, move, param);
+			ft_register_move(p, move, param);
 			return (1);
 		}
 		else
-			ft_do_move(p, move, param);
+			ft_register_move(p, move, param);
 	}
 	return (0);
 }

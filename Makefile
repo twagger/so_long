@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/11 15:28:59 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/12 09:55:43 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ AR			= ar rcs
 SRCS		= srcs/commons/map_controler.c \
 			  srcs/commons/map.c \
 			  srcs/commons/utils.c \
-			  srcs/commons/param.c \
 			  srcs/commons/drawing.c \
 			  srcs/mandatory/so_long.c \
 			  srcs/bonus/param.c \
@@ -60,12 +59,12 @@ SRCS		= srcs/commons/map_controler.c \
 BSRCS		= srcs/commons/map_controler.c \
 			  srcs/commons/map.c \
 			  srcs/commons/utils.c \
-			  srcs/commons/param.c \
 			  srcs/commons/drawing.c \
 			  srcs/bonus/so_long_bonus.c \
 			  srcs/bonus/param_bonus.c \
 			  srcs/bonus/hooks_bonus.c \
 			  srcs/bonus/move_bonus.c \
+			  srcs/bonus/move_utils_bonus.c \
 			  srcs/bonus/infobar_bonus.c			  
 
 OBJS		= $(SRCS:.c=.o)
