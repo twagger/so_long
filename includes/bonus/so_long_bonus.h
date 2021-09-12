@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 11:18:28 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 11:36:58 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_param
 	int		frames;
 	t_move	move;
 	int		keyblock;
+	int		endgame;
 }			t_param;
 
 typedef struct s_sprite
