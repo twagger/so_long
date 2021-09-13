@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:21:47 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:58:07 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_put_sprite(void *img, t_data *frame, int x, int y)
 	}
 }
 
-void ft_free_frame(t_data *frame)
+void	ft_free_frame(t_data *frame)
 {
 	if (frame)
 	{

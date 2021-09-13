@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:40:11 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:54:06 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:57:39 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_init_infoend(t_param *prm)
 {
 	int		x;
 	int		y;
-	
+
 	prm->infoend = (t_data *)malloc(sizeof(t_data));
 	if (!prm->infoend)
 		return (ERROR);

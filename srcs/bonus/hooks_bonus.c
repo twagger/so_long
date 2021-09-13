@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:36:25 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:57:55 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int	ft_handle_key(int key, void *param)
 {
-	t_param *prm;
+	t_param	*prm;
 
 	prm = (t_param *)param;
 	if (key == ESC)
@@ -38,7 +38,7 @@ int	ft_handle_key(int key, void *param)
 
 int	ft_handle_close(void *param)
 {
-	t_param *prm;
+	t_param	*prm;
 
 	prm = (t_param *)param;
 	ft_free_mem(prm->map, prm, prm->mlx, 0);
@@ -48,7 +48,7 @@ int	ft_handle_close(void *param)
 
 int	ft_render_next_frame(void *param)
 {
-	t_param *prm;
+	t_param	*prm;
 
 	prm = (t_param *)param;
 	if (prm->frames > 1000)

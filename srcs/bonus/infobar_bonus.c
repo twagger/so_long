@@ -6,11 +6,19 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:56:53 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:30:51 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:56:54 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	ft_put_infomessage(t_param *prm)
+{
+	if (prm->map->cols > 5)
+		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Total moves : ");
+	else
+		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Tot : ");
+}
 
 int	ft_init_infobar(t_param *prm)
 {
@@ -20,7 +28,8 @@ int	ft_init_infobar(t_param *prm)
 	prm->infobar = (t_data *)malloc(sizeof(t_data));
 	if (!prm->infobar)
 		return (ERROR);
-	prm->infobar->img = mlx_new_image(prm->mlx, prm->map->cols * SSIZE, TOP_GAP);
+	prm->infobar->img = mlx_new_image(prm->mlx, prm->map->cols * SSIZE, \
+		TOP_GAP);
 	if (prm->infobar->img == NULL)
 		return (ERROR);
 	prm->infobar->addr = mlx_get_data_addr(prm->infobar->img, \
@@ -34,10 +43,7 @@ int	ft_init_infobar(t_param *prm)
 			ft_img_pixel_put(prm->infobar, x, y, BG_COLOR);
 	}
 	mlx_put_image_to_window(prm->mlx, prm->win, prm->infobar->img, 0, 0);
-	if (prm->map->cols > 5)
-		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Total moves : ");
-	else
-		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Tot : ");
+	ft_put_infomessage(prm);
 	return (0);
 }
 
