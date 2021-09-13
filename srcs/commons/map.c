@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 13:32:08 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/12 19:15:37 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_free_map(t_map *map, int ret_code)
 			i = -1;
 			while (++i < map->rows)
 				free(map->map[i]);
+			free(map->map);
 		}
 		free(map);
 	}

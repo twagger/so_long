@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/12 11:03:36 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/12 19:10:00 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,8 +115,8 @@ endif
 
 $(NAME):	$(LMLX) $(LFT) $(OBJS)
 			@printf  "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME)]$(RESET)" 
-			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(OBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) \
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 all:		$(NAME)
