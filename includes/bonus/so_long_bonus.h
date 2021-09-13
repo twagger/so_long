@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:57:26 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 15:31:11 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 # endif
 # include "libft.h"
 # define ERROR -1
-# define AUTHORIZED "01CEP"
+# define AUTHORIZED "01CEPULDR"
+# define PATROL "ULDR"
 # define WALL '1'
-# define NBSPRITES 17
-# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3"
+# define NBSPRITES 29
+# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3F1F2F3G1G2G3H1H2H3I1I2I3"
 # define SSIZE 32
 # define TOP_GAP 25
 # define THEME "default"
@@ -45,8 +46,8 @@ typedef struct s_data
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
 }			t_data;
 
@@ -63,25 +64,6 @@ typedef struct s_move
 	int		next_y;
 }			t_move;
 
-typedef struct s_param
-{
-	void	*mlx;
-	void	*win;
-	t_map	*map;
-	void	**img;
-	int		total_items;
-	int		curr_items;
-	int		curr_moves;
-	int		is_on_exit;
-	t_data	*playground;
-	t_data	*infobar;
-	t_data	*infoend;
-	int		frames;
-	t_move	move;
-	int		keyblock;
-	int		endgame;
-}			t_param;
-
 typedef struct s_sprite
 {
 	int	x;
@@ -89,6 +71,26 @@ typedef struct s_sprite
 	int	next_x;
 	int	next_y;
 }		t_sprite;
+
+typedef struct s_param
+{
+	void		*mlx;
+	void		*win;
+	t_map		*map;
+	void		**img;
+	int			total_items;
+	int			curr_items;
+	int			curr_moves;
+	int			is_on_exit;
+	t_data		*playground;
+	t_data		*infoscore;
+	t_data		*infoend;
+	int			frames;
+	t_move		move;
+	int			keyblock;
+	int			endgame;
+	t_sprite	**mob;
+}				t_param;
 
 /*
 ** Commons
@@ -125,6 +127,8 @@ int			ft_endgame(t_param *prm, char *message);
 char		*ft_get_path(int c);
 int			ft_init_imgs(t_param *param, void *mlx);
 void		ft_draw_image(t_param *param, void *img, int x, int y);
+int			ft_init_img(t_param *prm, t_data **img, int width, int height);
+int			ft_clear_img(t_data *img, int width, int height);
 
 /*
 ** Actions
@@ -138,11 +142,11 @@ char		ft_get_next_tile(t_sprite p, int move, t_map *map);
 void		ft_get_next_position(t_sprite *p, int move, char next_tile);
 
 /*
-** Info bar
+** Info score
 */
 
-int			ft_init_infobar(t_param *param);
-int			ft_update_infobar(t_param *prm);
+int			ft_init_infoscore(t_param *param);
+int			ft_update_infoscore(t_param *prm);
 
 /*
 ** Drawing
@@ -154,5 +158,11 @@ void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void		ft_put_object(void *img, t_data *frame, int x, int y);
 void		ft_put_sprite(void *img, t_data *frame, int x, int y);
 void		ft_draw_playground(t_map *map, t_param *param);
+
+/*
+** Patrol
+*/
+
+int			ft_move_patrol(t_param *prm);
 
 #endif

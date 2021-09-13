@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:57:55 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 15:10:49 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_render_next_frame(void *param)
 	++(prm->frames);
 	if (prm->frames % 3 == 0)
 	{
+		ft_move_patrol(prm);
 		if (prm->move.nb_move > 0)
 			ft_do_move(prm);
 	}
@@ -67,7 +68,7 @@ int	ft_render_next_frame(void *param)
 			ft_endgame(prm, "You lose!");
 		return (0);
 	}
-	ft_update_infobar(prm);
+	ft_update_infoscore(prm);
 	mlx_put_image_to_window(prm->mlx, prm->win, \
 		prm->playground->img, 0, TOP_GAP);
 	return (0);

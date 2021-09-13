@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:40:11 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:57:39 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 15:36:25 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_put_endmessage(t_param *prm, char *message)
 		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE, TXT_COLOR, \
 			ft_itoa(prm->curr_moves - 1));
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 80, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + 2 * SSIZE, TXT_COLOR, \
-			"Press <ESC> to quit");
+		(prm->map->rows / 2) * SSIZE - \
+		(SSIZE / 2) + 2 * SSIZE, TXT_COLOR, "Press <ESC> to quit");
 }
 
 void	ft_put_small_endmessage(t_param *prm, char *message)
@@ -42,35 +42,11 @@ void	ft_put_small_endmessage(t_param *prm, char *message)
 			">><ESC><<");
 }
 
-int	ft_init_infoend(t_param *prm)
-{
-	int		x;
-	int		y;
-
-	prm->infoend = (t_data *)malloc(sizeof(t_data));
-	if (!prm->infoend)
-		return (ERROR);
-	prm->infoend->img = mlx_new_image(prm->mlx, \
-		prm->map->cols * SSIZE, 3 * SSIZE);
-	if (prm->infoend->img == NULL)
-		return (ERROR);
-	prm->infoend->addr = mlx_get_data_addr(prm->infoend->img, \
-		&prm->infoend->bits_per_pixel, &prm->infoend->line_length, \
-			&prm->infoend->endian);
-	y = -1;
-	while (++y < 3 * SSIZE)
-	{
-		x = -1;
-		while (++x < (SSIZE * prm->map->cols))
-			ft_img_pixel_put(prm->infoend, x, y, BG_COLOR);
-	}
-	return (0);
-}
-
 int	ft_endgame(t_param *prm, char *message)
 {
 	prm->keyblock = 1;
-	if (ft_init_infoend(prm) == ERROR)
+	if (ft_init_img(prm, &prm->infoend, prm->map->cols * SSIZE, 3 * SSIZE) \
+		== ERROR)
 		return (ERROR);
 	mlx_put_image_to_window(prm->mlx, prm->win, prm->infoend->img, 0, \
 		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) - 4);

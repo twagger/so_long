@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 10:58:07 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 14:44:52 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_img_pixel_put(t_data *data, int x, int y, int pix)
 	if ((unsigned int)pix != 0xFF000000)
 	{
 		dst = data->addr + \
-			(y * data->line_length + x * (data->bits_per_pixel / 8));
+			(y * data->line_len + x * (data->bpp / 8));
 		*(unsigned int *)dst = pix;
 	}
 }
@@ -37,8 +37,8 @@ void	ft_put_sprite(void *img, t_data *frame, int x, int y)
 	t_data	obj;
 
 	obj.img = img;
-	obj.addr = mlx_get_data_addr(obj.img, &obj.bits_per_pixel, \
-		&obj.line_length, &obj.endian);
+	obj.addr = mlx_get_data_addr(obj.img, &obj.bpp, \
+		&obj.line_len, &obj.endian);
 	total = 0;
 	init_x = x;
 	init_y = y;
@@ -79,7 +79,7 @@ t_data	*ft_init_frame(t_param *prm)
 	if (frame->img == NULL)
 		return (NULL);
 	frame->addr = mlx_get_data_addr(frame->img, \
-		&(frame->bits_per_pixel), &(frame->line_length), \
+		&(frame->bpp), &(frame->line_len), \
 		&(frame->endian));
 	y = -1;
 	while (++y < prm->map->rows * SSIZE)
@@ -108,6 +108,8 @@ void	ft_draw_playground(t_map *map, t_param *param)
 		while (++col < map->cols)
 		{
 			img_i = ft_strchr_index(AUTHORIZED, map->map[row][col], 0);
+			if (img_i > 4)
+				img_i = 3 * img_i + 3;
 			ft_put_sprite(param->img[0], param->playground, \
 				curr_x, curr_y);
 			ft_put_sprite(param->img[img_i], param->playground, \
