@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 11:36:58 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:21:21 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_param
 	int		curr_moves;
 	int		is_on_exit;
 	t_data	*playground;
+	t_data 	*infobar;
+	t_data	*infoend;
 	int		frames;
 	t_move	move;
 	int		keyblock;
@@ -114,6 +116,7 @@ int			ft_free_map(t_map *map, int ret_code);
 int			ft_handle_close(void *param);
 int			ft_handle_key(int key, void *param);
 int			ft_render_next_frame(void *param);
+int			ft_endgame(t_param *prm, char *message);
 
 /*
 ** Images
@@ -139,13 +142,14 @@ void		ft_get_next_position(t_sprite *p, int move, char next_tile);
 */
 
 int			ft_init_infobar(t_param *param);
-int			ft_update_move_info(t_param *prm);
+int			ft_update_infobar(t_param *prm);
 
 /*
 ** Drawing
 */
 
 t_data		*ft_init_frame(t_param *prm);
+void 		ft_free_frame(t_data *frame);
 void		ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void		ft_put_object(void *img, t_data *frame, int x, int y);
 void		ft_put_sprite(void *img, t_data *frame, int x, int y);

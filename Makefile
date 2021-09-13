@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/12 19:10:00 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/13 09:38:45 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ BSRCS		= srcs/commons/map_controler.c \
 			  srcs/bonus/hooks_bonus.c \
 			  srcs/bonus/move_bonus.c \
 			  srcs/bonus/move_utils_bonus.c \
-			  srcs/bonus/infobar_bonus.c			  
+			  srcs/bonus/infobar_bonus.c \
+			  srcs/bonus/endgame_bonus.c		  
 
 OBJS		= $(SRCS:.c=.o)
 BOBJS		= $(BSRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 11:36:48 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:23:23 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 		}
 		free(param->img);
 	}
-	if (param->playground)
-		free(param->playground->addr);
-	free(param->playground);
+	ft_free_frame(param->playground);
+	ft_free_frame(param->infobar);
+	ft_free_frame(param->infoend);
 	if (param->move.img)
 		free(param->move.img);
 	free(param);
@@ -116,10 +116,11 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->move.to_exit = 0;
 	(*param)->keyblock = 0;
 	(*param)->endgame = 0;
+	(*param)->infobar = NULL;
+	(*param)->infoend = NULL;
 	(*param)->move.img = (void **)malloc(sizeof(void *) * 3);
-	if (!(*param)->playground || !(*param)->move.img)
-		return (ERROR);
-	if (ft_init_imgs(*param, mlx) == ERROR)
+	if (ft_init_imgs(*param, mlx) == ERROR || \
+		!(*param)->playground || !(*param)->move.img)
 		return (ERROR);
 	return (0);
 }
