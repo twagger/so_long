@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 15:55:05 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 16:49:26 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@
 # define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3F1F2F3G1G2G3H1H2H3I1I2I3"
 # define SSIZE 32
 # define TOP_GAP 25
-# define THEME "default"
+# ifdef HALLOWEEN
+#  define THEME "halloween"
+# else
+#  define THEME "default"
+# endif
 # define BG_COLOR 0x009C9C15
 # define TXT_COLOR 0x00FFFFFF
 # define UP 0
