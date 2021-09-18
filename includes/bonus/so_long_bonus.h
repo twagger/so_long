@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 16:49:26 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 17:02:43 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}		t_pos;
-
 typedef struct s_mob
 {
 	char			type;
@@ -77,7 +71,7 @@ typedef struct s_mob
 	int				from_coll;
 	int				to_coll;
 	struct s_mob	*next;
-}			t_mob;
+}					t_mob;
 
 typedef struct s_param
 {
@@ -88,7 +82,6 @@ typedef struct s_param
 	int			total_items;
 	int			curr_items;
 	int			curr_moves;
-	int			is_on_exit;
 	t_data		*playground;
 	t_data		*infoscore;
 	t_data		*infoend;
@@ -136,23 +129,22 @@ int		ft_init_img(t_param *prm, t_data **img, int width, int height);
 int		ft_clear_img(t_data *img, int width, int height);
 
 /*
-** Actions
+** Moves
 */
 
-int		ft_mover(t_param *param, int move);
-void	ft_do_move(t_param *param);
 t_mob	ft_get_player_pos(t_map *map);
 int		ft_get_pos(int curr, int next, int n);
 char	ft_get_next_tile(int x, int y, int move, t_map *map);
-
 void	ft_get_next_position(t_mob *m, int move, char next_tile);
 void	ft_register_move(char type, t_param *prm, int move);
 void	ft_move_mobs(t_param *prm);
+void	ft_update_map_array(t_mob *m, t_param *prm, char next_tile);
+
+/*
+** Mobs utils
+*/
 
 void	ft_mobsclear(t_mob **lst);
-t_mob	*ft_moblast(t_mob *lst);
-void	ft_mobsadd_back(t_mob **lst, t_mob *new);
-void	ft_update_map_array(t_mob *m, t_param *prm, char next_tile);
 int		ft_create_mobs(t_map *map, t_param *prm);
 
 /*
@@ -172,11 +164,5 @@ void	ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void	ft_put_object(void *img, t_data *frame, int x, int y);
 void	ft_put_sprite(void *img, t_data *frame, int x, int y);
 void	ft_draw_playground(t_map *map, t_param *param);
-
-/*
-** Patrol
-*/
-
-int		ft_move_patrol(t_param *prm);
 
 #endif

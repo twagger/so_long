@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 12:05:18 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 16:58:35 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	ft_init_param(t_param **param, void *mlx, void *win, t_map *map)
 	(*param)->curr_items = 0;
 	(*param)->curr_moves = 0;
 	(*param)->total_items = ft_count_items(map, 'C');
-	(*param)->is_on_exit = 0;
 	(*param)->frames = 0;
 	(*param)->playground = ft_init_frame(*param);
 	(*param)->keyblock = 0;

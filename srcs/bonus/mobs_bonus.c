@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 12:11:59 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 17:00:54 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_mobadd_back(t_mob **lst, t_mob *new)
 		*lst = new;
 }
 
-t_mob	*ft_mobnew(t_pos p, char type)
+t_mob	*ft_mobnew(int x, int y, char type)
 {
 	t_mob	*new;
 
@@ -56,8 +56,8 @@ t_mob	*ft_mobnew(t_pos p, char type)
 	new->from_coll = 0;
 	new->to_coll = -1;
 	new->nb_move = 0;
-	new->x = p.x;
-	new->y = p.y;
+	new->x = x;
+	new->y = y;
 	new->next_x = -1;
 	new->next_y = -1;
 	new->next = NULL;
@@ -68,7 +68,6 @@ int	ft_create_mobs(t_map *map, t_param *prm)
 {
 	int		col;
 	int		row;
-	t_pos	p;
 	t_mob	*new;
 
 	row = -1;
@@ -79,9 +78,7 @@ int	ft_create_mobs(t_map *map, t_param *prm)
 		{
 			if (ft_strchr(MOBS, map->map[row][col]))
 			{
-				p.x = col;
-				p.y = row;
-				new = ft_mobnew(p, map->map[row][col]);
+				new = ft_mobnew(col, row, map->map[row][col]);
 				if (!new)
 					return (ERROR);
 				ft_mobadd_back(&prm->mobs, new);
