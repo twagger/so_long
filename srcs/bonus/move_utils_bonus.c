@@ -6,18 +6,19 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 11:14:28 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:04:14 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-t_sprite	ft_get_player_pos(t_map *map)
+t_mob	ft_get_player_pos(t_map *map)
 {
-	int			i;
-	int			j;
-	t_sprite	player;
+	int		i;
+	int		j;
+	t_mob	player;
 
+	player.type = 'P';
 	i = -1;
 	while (++i < map->rows)
 	{
@@ -37,36 +38,36 @@ t_sprite	ft_get_player_pos(t_map *map)
 	return (player);
 }
 
-void	ft_get_next_position(t_sprite *p, int move, char next_tile)
+void	ft_get_next_position(t_mob *m, int move, char next_tile)
 {
-	p->next_x = p->x;
-	p->next_y = p->y;
+	m->next_x = m->x;
+	m->next_y = m->y;
 	if (next_tile == '1')
 		return ;
 	if (move == UP)
-		--(p->next_y);
+		--(m->next_y);
 	if (move == RIGHT)
-		++(p->next_x);
+		++(m->next_x);
 	if (move == LEFT)
-		--(p->next_x);
+		--(m->next_x);
 	if (move == DOWN)
-		++(p->next_y);
+		++(m->next_y);
 }
 
-char	ft_get_next_tile(t_sprite p, int move, t_map *map)
+char	ft_get_next_tile(int x, int y, int move, t_map *map)
 {
 	if (move == UP)
-		return (map->map[p.y - 1][p.x]);
+		return (map->map[y - 1][x]);
 	if (move == RIGHT)
-		return (map->map[p.y][p.x + 1]);
+		return (map->map[y][x + 1]);
 	if (move == LEFT)
-		return (map->map[p.y][p.x - 1]);
+		return (map->map[y][x - 1]);
 	if (move == DOWN)
-		return (map->map[p.y + 1][p.x]);
+		return (map->map[y + 1][x]);
 	return ('X');
 }
 
-int	ft_calculate_sprite_pos(int curr, int next, int n)
+int	ft_get_pos(int curr, int next, int n)
 {
 	if (curr == next)
 		return (curr * SSIZE);
@@ -77,4 +78,25 @@ int	ft_calculate_sprite_pos(int curr, int next, int n)
 		return ((curr * SSIZE) - ((((curr * SSIZE) - (next * SSIZE)) \
 			/ NBMOVES) * (NBMOVES - n + 1)));
 	return (-1);
+}
+
+void	ft_update_map_array(t_mob *m, t_param *prm)
+{
+	if (m->from_exit)
+		prm->map->map[m->y][m->x] = 'E';
+	else if (m->from_coll && m->type != 'P')
+		prm->map->map[m->y][m->x] = 'C';
+	else
+		prm->map->map[m->y][m->x] = '0';
+	m->to_exit = (prm->map->map[m->next_y][m->next_x] == 'E');
+	m->to_coll = (prm->map->map[m->next_y][m->next_x] == 'C');
+	if (m->to_coll && m->type == 'P')
+	{
+		m->to_coll = 0;
+		++(prm->curr_items);
+		prm->map->map[m->next_y][m->next_x] = '0';
+	}
+	if (m->type == 'P' && m->to_exit && prm->curr_items == prm->total_items)
+		prm->endgame = 1;
+	prm->map->map[m->next_y][m->next_x] = m->type;
 }

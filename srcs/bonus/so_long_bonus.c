@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:42:35 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 15:10:37 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 13:42:40 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ int	ft_game_loop(t_map *map)
 	if (ft_init_imgs(param, mlx) == ERROR)
 		return (ft_free_mem(map, param, mlx, ERROR));
 	ft_draw_playground(map, param);
-	if (ft_update_infoscore(param) == ERROR)
-		return (ft_free_mem(map, param, mlx, ERROR));
-	if (ft_update_infoscore(param) == ERROR)
+	if (ft_create_mobs(map, param) == ERROR)
 		return (ft_free_mem(map, param, mlx, ERROR));
 	mlx_loop_hook(mlx, ft_render_next_frame, param);
 	mlx_hook(win, 2, 1L << 0, ft_handle_key, param);

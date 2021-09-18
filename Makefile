@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/13 15:21:21 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/18 11:41:08 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ BSRCS		= srcs/commons/map_controler.c \
 			  srcs/bonus/so_long_bonus.c \
 			  srcs/bonus/param_bonus.c \
 			  srcs/bonus/hooks_bonus.c \
+			  srcs/bonus/mobs_bonus.c \
 			  srcs/bonus/move_bonus.c \
 			  srcs/bonus/move_utils_bonus.c \
 			  srcs/bonus/infoscore_bonus.c \
@@ -129,8 +130,8 @@ bonus:		BFLAGS = -DBONUS
 bonus:		$(LMLX) $(LFT) $(BOBJS)
 			@printf "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
 			@touch bonus
-			@$(CC) $(CFLAGS) $(LMLXFLAGS) $(LFTFLAGS) $(BOBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR)
+			@$(CC) $(CFLAGS) $(BOBJS) -o $(NAME) \
+				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 clean:

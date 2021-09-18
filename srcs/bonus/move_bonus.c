@@ -6,111 +6,120 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 11:32:55 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 14:59:22 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+#define W 13
+#define S 1
+#define A 0
+#define D 2
+#define KEYMAP "321----------0"
 
-void	ft_update_map_array(t_sprite p, t_param *param, char next_tile)
+void	ft_register_ennemy_moves(t_param *prm)
 {
-	int	on_exit;
+	ft_register_move('U', prm, KEYMAP[W] - 48);
+	ft_register_move('L', prm, KEYMAP[A] - 48);
+	ft_register_move('D', prm, KEYMAP[S] - 48);
+	ft_register_move('R', prm, KEYMAP[D] - 48);
+}
 
-	on_exit = 0;
-	if (next_tile == '1')
+void	ft_register_move(char type, t_param *prm, int move)
+{
+	t_mob	*begin;
+	char	next_tile;
+
+	begin = prm->mobs;
+	while (prm->mobs)
 	{
-		param->move.from_exit = 0;
-		return ;
-	}
-	if (param->is_on_exit == 1)
-		param->map->map[p.y][p.x] = 'E';
-	else
-		param->map->map[p.y][p.x] = '0';
-	param->move.from_exit = param->is_on_exit;
-	if (param->map->map[p.next_y][p.next_x] == 'E')
-		on_exit = 1;
-	param->is_on_exit = on_exit;
-	param->move.to_exit = on_exit;
-	param->map->map[p.next_y][p.next_x] = 'P';
-}
-
-void	ft_register_move(t_sprite p, int move, t_param *param, char next_tile)
-{
-	param->move.nb_move = NBMOVES;
-	param->move.x = p.x;
-	param->move.y = p.y;
-	ft_get_next_position(&p, move, next_tile);
-	param->move.next_x = p.next_x;
-	param->move.next_y = p.next_y;
-	param->move.img[0] = param->img[(move * 3) + 5];
-	param->move.img[1] = param->img[(move * 3) + 6];
-	param->move.img[2] = param->img[(move * 3) + 7];
-	ft_update_map_array(p, param, next_tile);
-	if (next_tile != '1')
-		++(param->curr_moves);
-}
-
-void	ft_erase_move_zone(t_param *param)
-{
-	ft_put_sprite(param->img[0], param->playground, \
-		param->move.x * SSIZE, param->move.y * SSIZE);
-	ft_put_sprite(param->img[0], param->playground, \
-		param->move.next_x * SSIZE, param->move.next_y * SSIZE);
-	if (param->move.from_exit)
-		ft_put_sprite(param->img[3], param->playground, \
-			param->move.x * SSIZE, param->move.y * SSIZE);
-	if (param->move.to_exit)
-		ft_put_sprite(param->img[3], param->playground, \
-			param->move.next_x * SSIZE, param->move.next_y * SSIZE);
-}
-
-void	ft_do_move(t_param *param)
-{
-	int	x;
-	int	y;
-
-	if (param->move.nb_move == NBMOVES)
-		param->keyblock = 1;
-	ft_erase_move_zone(param);
-	x = ft_calculate_sprite_pos(param->move.x, param->move.next_x, \
-		param->move.nb_move);
-	y = ft_calculate_sprite_pos(param->move.y, param->move.next_y, \
-		param->move.nb_move);
-	ft_put_sprite(param->move.img[param->move.next_img], \
-		param->playground, x, y);
-	++(param->move.next_img);
-	if (param->move.next_img > 2)
-		param->move.next_img = 0;
-	--(param->move.nb_move);
-	if (param->move.nb_move == 0)
-		param->keyblock = 0;
-}
-
-int	ft_mover(t_param *param, int move)
-{
-	t_sprite	p;
-	char		next;
-
-	p = ft_get_player_pos(param->map);
-	next = ft_get_next_tile(p, move, param->map);
-	if (next == '1')
-		ft_register_move(p, move, param, next);
-	if (next == '0')
-		ft_register_move(p, move, param, next);
-	if (next == 'C')
-	{
-		ft_register_move(p, move, param, next);
-		++(param->curr_items);
-	}
-	if (next == 'E')
-	{
-		if (param->curr_items == param->total_items)
+		if (prm->mobs->type == type && prm->mobs->nb_move == 0)
 		{
-			ft_register_move(p, move, param, next);
-			return (1);
+			next_tile = ft_get_next_tile(prm->mobs->x, prm->mobs->y, \
+				move, prm->map);
+			if (ft_strchr(MOBS, next_tile))
+			{
+				if (type == 'P' || ft_strchr_index(MOBS, next_tile, 0) == 0)
+					prm->endgame = 2;
+				next_tile = '1';
+			}
+			ft_get_next_position(prm->mobs, move, next_tile);
+			prm->mobs->nb_move = NBMOVES;
+			prm->mobs->move = move;
+			ft_update_map_array(prm->mobs, prm);
+			if (next_tile == '1')
+			{
+				if (type == 'R')
+				 	prm->mobs->type = 'L';
+				if (type == 'L')
+				 	prm->mobs->type = 'R';
+				if (type == 'U')
+				 	prm->mobs->type = 'D';
+				if (type == 'D')
+				 	prm->mobs->type = 'U';
+			}
+			if (next_tile != '1' && type == 'P')
+				++(prm->curr_moves);
 		}
-		else
-			ft_register_move(p, move, param, next);
+		prm->mobs = prm->mobs->next;
 	}
-	return (0);
+	prm->mobs = begin;
+}
+
+void	ft_update_move_zone(t_param *prm, t_mob *m)
+{
+	ft_put_sprite(prm->img[0], prm->playground, m->x * SSIZE, m->y * SSIZE);
+	ft_put_sprite(prm->img[0], prm->playground, \
+		m->next_x * SSIZE, m->next_y * SSIZE);
+	if (m->from_exit)
+		ft_put_sprite(prm->img[3], prm->playground, \
+			m->x * SSIZE, m->y * SSIZE);
+	if (m->to_exit)
+		ft_put_sprite(prm->img[3], prm->playground, \
+			m->next_x * SSIZE, m->next_y * SSIZE);
+	if (m->from_coll)
+		ft_put_sprite(prm->img[2], prm->playground, \
+			m->x * SSIZE, m->y * SSIZE);
+	if (m->to_coll)
+		ft_put_sprite(prm->img[2], prm->playground, \
+			m->next_x * SSIZE, m->next_y * SSIZE);
+}
+
+void	ft_move_mobs(t_param *prm)
+{
+	int		x;
+	int		y;
+	int		img_i;
+	t_mob	*begin;
+
+	begin = prm->mobs;
+	while (prm->mobs)
+	{
+		if (prm->mobs->nb_move != 0)
+		{
+			if (prm->mobs->type == 'P' && prm->mobs->nb_move == NBMOVES)
+				prm->keyblock = 1;
+			ft_update_move_zone(prm, prm->mobs);
+			x = ft_get_pos(prm->mobs->x, prm->mobs->next_x, prm->mobs->nb_move);
+			y = ft_get_pos(prm->mobs->y, prm->mobs->next_y, prm->mobs->nb_move);
+			img_i = ft_strchr_index(AUTHORIZED, prm->mobs->type, 0);
+			if (img_i > 4)
+				img_i = (3 * img_i) + 2;
+			else
+				img_i += (3 * prm->mobs->move) + 1;	
+			ft_put_sprite(prm->img[img_i + prm->mobs->next_img], \
+				prm->playground, x, y);
+			if (++(prm->mobs->next_img) > 2)
+				prm->mobs->next_img = 0;
+			if (--(prm->mobs->nb_move) == 0)
+			{
+				prm->mobs->x = prm->mobs->next_x;
+				prm->mobs->y = prm->mobs->next_y;
+				prm->mobs->from_exit = prm->mobs->to_exit;
+				prm->mobs->from_coll = prm->mobs->to_coll;
+			}
+		}
+		prm->mobs = prm->mobs->next;
+	}
+	prm->mobs = begin;
 }
