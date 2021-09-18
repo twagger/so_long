@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 22:02:56 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 22:14:17 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@
 #  define K_DOWN 115
 #  define K_LEFT 97
 #  define K_RIGHT 100
-# endif
-
-# ifdef MAC
-#  define K_QUIT 0xff1b
+# else
+#  define K_QUIT 65307
 #  define K_UP 13
 #  define K_DOWN 1
 #  define K_LEFT 0
