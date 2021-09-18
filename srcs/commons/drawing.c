@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 21:23:19 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 22:22:31 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_free_frame(t_data *frame)
 {
 	if (frame)
 	{
-		if (frame->addr)
+		//if (frame->addr)
 			//free(frame->addr);
 		free(frame);
 	}

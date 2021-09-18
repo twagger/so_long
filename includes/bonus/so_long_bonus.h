@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 22:14:17 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 22:21:53 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,21 @@ typedef struct s_mob
 
 typedef struct s_param
 {
-	void		*mlx;
-	void		*win;
-	t_map		*map;
-	void		**img;
-	int			total_items;
-	int			curr_items;
-	int			curr_moves;
-	t_data		*playground;
-	t_data		*infoscore;
-	t_data		*infoend;
-	int			frames;
-	int			keyblock;
-	int			endgame;
-	t_mob		*mobs;
-}				t_param;
-
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	void	**img;
+	int		total_items;
+	int		curr_items;
+	int		curr_moves;
+	t_data	*playground;
+	t_data	*infoscore;
+	t_data	*infoend;
+	int		frames;
+	int		keyblock;
+	int		endgame;
+	t_mob	*mobs;
+}			t_param;
 
 /*
 ** FUNCTIONS
