@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 16:58:35 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 00:03:35 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 	{
 		i = -1;
 		while (++i < NBSPRITES)
-		{
-			if (mlx)
-				mlx_destroy_image(mlx, param->img[i]);
-			else
-				free(param->img[i]);
-		}
+			mlx_destroy_image(mlx, param->img[i]);
 		free(param->img);
 	}
-	ft_free_frame(param->playground);
-	ft_free_frame(param->infoscore);
-	ft_free_frame(param->infoend);
+	ft_free_frame(param->playground, param->mlx);
+	ft_free_frame(param->infoscore, param->mlx);
+	ft_free_frame(param->infoend, param->mlx);
 	ft_mobsclear(&(param->mobs));
+	mlx_destroy_window(param->mlx, param->win);
+	mlx_destroy_display(param->mlx);
 	free(param);
 	return (ret_code);
 }

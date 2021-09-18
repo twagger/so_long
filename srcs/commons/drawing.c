@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:18:42 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 22:22:31 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 00:02:04 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_put_sprite(void *img, t_data *frame, int x, int y)
 	}
 }
 
-void	ft_free_frame(t_data *frame)
+void	ft_free_frame(t_data *frame, void *mlx)
 {
 	if (frame)
 	{
-		//if (frame->addr)
-			//free(frame->addr);
+		if (frame->img)
+			mlx_destroy_image(mlx, frame->img);
 		free(frame);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 22:21:53 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 00:02:24 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int		ft_update_infoscore(t_param *prm);
 */
 
 t_data	*ft_init_frame(t_param *prm);
-void	ft_free_frame(t_data *frame);
+void	ft_free_frame(t_data *frame, void *mlx);
 void	ft_img_pixel_put(t_data *data, int x, int y, int pix);
 void	ft_put_object(void *img, t_data *frame, int x, int y);
 void	ft_put_sprite(void *img, t_data *frame, int x, int y);
