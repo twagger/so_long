@@ -6,32 +6,26 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 15:54:54 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 21:42:25 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-#define ESC 53
-#define W 13
-#define S 1
-#define A 0
-#define D 2
-#define KEYMAP "321----------0"
 
 int	ft_handle_key(int key, void *param)
 {
 	t_param	*prm;
 
 	prm = (t_param *)param;
-	if (key == ESC)
+	if (key == K_QUIT)
 	{
 		ft_free_mem(prm->map, prm, prm->mlx, 0);
 		exit(0);
 	}
-	if (key == W || key == S || key == A || key == D)
+	if (key == K_UP || key == K_DOWN || key == K_LEFT || key == K_RIGHT)
 	{
 		if (prm->keyblock == 0)
-			ft_register_move('P', param, KEYMAP[key] - 48);
+			ft_register_move('P', param, ft_getmove(key));
 	}
 	return (0);
 }
@@ -62,10 +56,10 @@ void	ft_unfreeze_player(t_param *prm)
 
 void	ft_register_ennemy_moves(t_param *prm)
 {
-	ft_register_move('U', prm, KEYMAP[W] - 48);
-	ft_register_move('L', prm, KEYMAP[A] - 48);
-	ft_register_move('D', prm, KEYMAP[S] - 48);
-	ft_register_move('R', prm, KEYMAP[D] - 48);
+	ft_register_move('U', prm, ft_getmove(K_UP));
+	ft_register_move('L', prm, ft_getmove(K_LEFT));
+	ft_register_move('D', prm, ft_getmove(K_DOWN));
+	ft_register_move('R', prm, ft_getmove(K_RIGHT));
 }
 
 int	ft_render_next_frame(void *param)

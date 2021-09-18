@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 17:02:43 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 22:02:56 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@
 # endif
 # include "libft.h"
 # define ERROR -1
-# define SPEED 3
-# define AUTHORIZED "01CEPURDL"
-# define MOBS "PURDL"
-# define WALL '1'
+
+/*
+** GAME PARAMS
+*/
+
+# ifndef SPEED
+#  define SPEED 3
+# endif
+# define NBMOVES 8
 # define NBSPRITES 29
-# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3F1F2F3G1G2G3H1H2H3I1I2I3"
 # define SSIZE 32
 # define TOP_GAP 25
 # ifdef HALLOWEEN
@@ -34,11 +38,39 @@
 # endif
 # define BG_COLOR 0x009C9C15
 # define TXT_COLOR 0x00FFFFFF
-# define UP 0
-# define RIGHT 1
-# define DOWN 2
-# define LEFT 3
-# define NBMOVES 8
+
+/*
+** SPRITE BINDING
+*/
+
+# define AUTHORIZED "01CEPURDL"
+# define MOBS "PURDL"
+# define WALL '1'
+# define SPRITES "0001COEXPLU1U2U3R1R2R3D1D2D3L1L2L3F1F2F3G1G2G3H1H2H3I1I2I3"
+
+/*
+** KEY BINDING
+*/
+
+# ifdef PC
+#  define K_QUIT 65307
+#  define K_UP 119
+#  define K_DOWN 115
+#  define K_LEFT 97
+#  define K_RIGHT 100
+# endif
+
+# ifdef MAC
+#  define K_QUIT 0xff1b
+#  define K_UP 13
+#  define K_DOWN 1
+#  define K_LEFT 0
+#  define K_RIGHT 2
+# endif
+
+/*
+** DATA STRUCTURES
+*/
 
 typedef struct s_map
 {
@@ -91,6 +123,11 @@ typedef struct s_param
 	t_mob		*mobs;
 }				t_param;
 
+
+/*
+** FUNCTIONS
+*/
+
 /*
 ** Commons
 */
@@ -100,6 +137,7 @@ int		ft_exit_w_message(char *message, char *message2, int fd, int code);
 int		ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
 int		ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 int		ft_free_param(t_param *param, void *mlx, int ret_code);
+int		ft_getmove(int key);
 
 /*
 ** Map

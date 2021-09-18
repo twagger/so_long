@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/18 16:49:09 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/18 22:06:42 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,16 @@ endif
 
 ifeq ($(HALLOWEEN), true)
 	CFLAGS	+= -D HALLOWEEN=true
+endif
+
+ifneq ($(SPEED),)
+	CFLAGS	+= -D SPEED=$(SPEED)
+endif
+
+ifneq ($(KEYBOARD),)
+	CFLAGS	+= -D $(KEYBOARD)
+else
+	CFLAGS	+= -D MAC
 endif
 
 ################################################################################

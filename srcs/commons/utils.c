@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 23:19:10 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 21:43:59 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 #else
 # include "so_long.h"
 #endif
+
+int	ft_getmove(int key)
+{
+	int	i;
+	int	res;
+	int	kb[4];
+
+	res = 0;
+	kb[0] = K_UP;
+	kb[1] = K_RIGHT;
+	kb[2] = K_DOWN;
+	kb[3] = K_LEFT;
+	i = -1;
+	while (++i < 4)
+	{
+		if (key == kb[i])
+			res = i;
+	}
+	return (res);
+}
 
 int	ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
 {

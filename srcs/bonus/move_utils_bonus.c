@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 15:28:14 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 21:43:48 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,25 @@ void	ft_get_next_position(t_mob *m, int move, char next_tile)
 	m->next_y = m->y;
 	if (next_tile == '1')
 		return ;
-	if (move == UP)
+	if (move == ft_getmove(K_UP))
 		--(m->next_y);
-	if (move == RIGHT)
+	if (move == ft_getmove(K_RIGHT))
 		++(m->next_x);
-	if (move == LEFT)
+	if (move == ft_getmove(K_LEFT))
 		--(m->next_x);
-	if (move == DOWN)
+	if (move == ft_getmove(K_DOWN))
 		++(m->next_y);
 }
 
 char	ft_get_next_tile(int x, int y, int move, t_map *map)
 {
-	if (move == UP)
+	if (move == ft_getmove(K_UP))
 		return (map->map[y - 1][x]);
-	if (move == RIGHT)
+	if (move == ft_getmove(K_RIGHT))
 		return (map->map[y][x + 1]);
-	if (move == LEFT)
+	if (move == ft_getmove(K_LEFT))
 		return (map->map[y][x - 1]);
-	if (move == DOWN)
+	if (move == ft_getmove(K_DOWN))
 		return (map->map[y + 1][x]);
 	return ('X');
 }

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 16:53:40 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 22:03:05 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # endif
 # include "libft.h"
 # define ERROR -1
-# define AUTHORIZED "01CEP"
-# define WALL '1'
+
+/*
+** GAME PARAMS
+*/
+
 # define NBSPRITES 5
-# define SPRITES "0001COEXPL"
 # define SSIZE 32
 # ifdef HALLOWEEN
 #  define THEME "halloween"
@@ -30,10 +32,38 @@
 #  define THEME "default"
 # endif
 # define TOP_GAP 0
-# define UP 0
-# define RIGHT 1
-# define DOWN 2
-# define LEFT 3
+
+/*
+** SPRITE BINDING
+*/
+
+# define WALL '1'
+# define AUTHORIZED "01CEP"
+# define SPRITES "0001COEXPL"
+
+/*
+** KEY BINDING
+*/
+
+# ifdef PC
+#  define K_QUIT 65307
+#  define K_UP 119
+#  define K_DOWN 115
+#  define K_LEFT 97
+#  define K_RIGHT 100
+# endif
+
+# ifdef MAC
+#  define K_QUIT 53
+#  define K_UP 13
+#  define K_DOWN 1
+#  define K_LEFT 0
+#  define K_RIGHT 2
+# endif
+
+/*
+** DATA STRUCTURES
+*/
 
 typedef struct s_map
 {
@@ -73,6 +103,10 @@ typedef struct s_sprite
 }		t_sprite;
 
 /*
+** FUNCTIONS
+*/
+
+/*
 ** Commons
 */
 
@@ -81,6 +115,7 @@ int			ft_exit_w_message(char *message, char *message2, int fd, int code);
 int			ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
 int			ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 int			ft_free_param(t_param *param, void *mlx, int ret_code);
+int			ft_getmove(int key);
 
 /*
 ** Map
@@ -91,7 +126,7 @@ int			ft_create_map(int fd, t_map **map, int rows);
 int			ft_free_map(t_map *map, int ret_code);
 
 /*
-** Hooks
+** Handlers
 */
 
 int			ft_handle_close(void *param);
@@ -107,7 +142,7 @@ int			ft_init_imgs(t_param *param, void *mlx);
 void		ft_draw_image(t_param *param, void *img, int x, int y);
 
 /*
-** Actions
+** Moves
 */
 
 int			ft_mover(t_param *param, int move);

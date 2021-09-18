@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:00:55 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 21:44:57 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ void	ft_get_next_position(t_sprite *p, int move)
 {
 	p->next_x = p->x;
 	p->next_y = p->y;
-	if (move == UP)
+	if (move == ft_getmove(K_UP))
 		--(p->next_y);
-	if (move == RIGHT)
+	if (move == ft_getmove(K_RIGHT))
 		++(p->next_x);
-	if (move == LEFT)
+	if (move == ft_getmove(K_LEFT))
 		--(p->next_x);
-	if (move == DOWN)
+	if (move == ft_getmove(K_DOWN))
 		++(p->next_y);
 }
 
 char	ft_get_next_tile(t_sprite p, int move, t_map *map)
 {
-	if (move == UP)
+	if (move == ft_getmove(K_UP))
 		return (map->map[p.y - 1][p.x]);
-	if (move == RIGHT)
+	if (move == ft_getmove(K_RIGHT))
 		return (map->map[p.y][p.x + 1]);
-	if (move == LEFT)
+	if (move == ft_getmove(K_LEFT))
 		return (map->map[p.y][p.x - 1]);
-	if (move == DOWN)
+	if (move == ft_getmove(K_DOWN))
 		return (map->map[p.y + 1][p.x]);
 	return ('X');
 }

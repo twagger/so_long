@@ -6,16 +6,11 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 16:16:11 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 21:03:14 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-#define W 13
-#define S 1
-#define A 0
-#define D 2
-#define KEYMAP "321----------0"
 #define SWITCHER "RLRUDU"
 
 void	ft_handle_collisions(t_param *prm, char *next_tile, char type)
