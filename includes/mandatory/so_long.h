@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 14:45:03 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:10:21 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_sprite
 
 int			ft_free_and_return(char **to_free, int to_return);
 int			ft_exit_w_message(char *message, char *message2, int fd, int code);
-int			create_trgb(int t, int r, int g, int b);
 int			ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
 int			ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 int			ft_free_param(t_param *param, void *mlx, int ret_code);

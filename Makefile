@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/18 11:41:08 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/18 15:09:45 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,6 @@ BSRCS		= srcs/commons/map_controler.c \
 			  srcs/bonus/move_utils_bonus.c \
 			  srcs/bonus/infoscore_bonus.c \
 			  srcs/bonus/endgame_bonus.c \
-			  srcs/bonus/patrol_bonus.c \
 			  srcs/bonus/image_bonus.c
 
 OBJS		= $(SRCS:.c=.o)

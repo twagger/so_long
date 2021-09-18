@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 14:05:49 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:55:05 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # endif
 # include "libft.h"
 # define ERROR -1
+# define SPEED 3
 # define AUTHORIZED "01CEPURDL"
 # define MOBS "PURDL"
 # define WALL '1'
@@ -99,7 +100,6 @@ typedef struct s_param
 
 int		ft_free_and_return(char **to_free, int to_return);
 int		ft_exit_w_message(char *message, char *message2, int fd, int code);
-int		create_trgb(int t, int r, int g, int b);
 int		ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
 int		ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
 int		ft_free_param(t_param *param, void *mlx, int ret_code);
@@ -148,9 +148,8 @@ void	ft_move_mobs(t_param *prm);
 void	ft_mobsclear(t_mob **lst);
 t_mob	*ft_moblast(t_mob *lst);
 void	ft_mobsadd_back(t_mob **lst, t_mob *new);
-void	ft_update_map_array(t_mob *m, t_param *prm);
+void	ft_update_map_array(t_mob *m, t_param *prm, char next_tile);
 int		ft_create_mobs(t_map *map, t_param *prm);
-void	ft_register_ennemy_moves(t_param *prm);
 
 /*
 ** Info score

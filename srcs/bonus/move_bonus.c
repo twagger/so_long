@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 14:59:22 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 16:16:11 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 #define A 0
 #define D 2
 #define KEYMAP "321----------0"
+#define SWITCHER "RLRUDU"
 
-void	ft_register_ennemy_moves(t_param *prm)
+void	ft_handle_collisions(t_param *prm, char *next_tile, char type)
 {
-	ft_register_move('U', prm, KEYMAP[W] - 48);
-	ft_register_move('L', prm, KEYMAP[A] - 48);
-	ft_register_move('D', prm, KEYMAP[S] - 48);
-	ft_register_move('R', prm, KEYMAP[D] - 48);
+	if (ft_strchr(MOBS, *next_tile))
+	{
+		if (type == 'P' || ft_strchr_index(MOBS, *next_tile, 0) == 0)
+			prm->endgame = 2;
+		*next_tile = '1';
+	}
+	if (*next_tile == '1' && type != 'P')
+		prm->mobs->type = SWITCHER[ft_strchr_index(SWITCHER, \
+			prm->mobs->type, 0) + 1];
 }
 
 void	ft_register_move(char type, t_param *prm, int move)
@@ -37,29 +43,13 @@ void	ft_register_move(char type, t_param *prm, int move)
 		{
 			next_tile = ft_get_next_tile(prm->mobs->x, prm->mobs->y, \
 				move, prm->map);
-			if (ft_strchr(MOBS, next_tile))
-			{
-				if (type == 'P' || ft_strchr_index(MOBS, next_tile, 0) == 0)
-					prm->endgame = 2;
-				next_tile = '1';
-			}
+			ft_handle_collisions(prm, &next_tile, type);
 			ft_get_next_position(prm->mobs, move, next_tile);
+			ft_update_map_array(prm->mobs, prm, next_tile);
 			prm->mobs->nb_move = NBMOVES;
 			prm->mobs->move = move;
-			ft_update_map_array(prm->mobs, prm);
-			if (next_tile == '1')
-			{
-				if (type == 'R')
-				 	prm->mobs->type = 'L';
-				if (type == 'L')
-				 	prm->mobs->type = 'R';
-				if (type == 'U')
-				 	prm->mobs->type = 'D';
-				if (type == 'D')
-				 	prm->mobs->type = 'U';
-			}
-			if (next_tile != '1' && type == 'P')
-				++(prm->curr_moves);
+			if (type == 'P')
+				prm->keyblock = 1;
 		}
 		prm->mobs = prm->mobs->next;
 	}
@@ -85,11 +75,25 @@ void	ft_update_move_zone(t_param *prm, t_mob *m)
 			m->next_x * SSIZE, m->next_y * SSIZE);
 }
 
+void	ft_put_next_sprite(t_param *prm, int x, int y)
+{
+	int	img_i;
+
+	img_i = ft_strchr_index(AUTHORIZED, prm->mobs->type, 0);
+	if (img_i > 4)
+		img_i = (3 * img_i) + 2;
+	else
+		img_i += (3 * prm->mobs->move) + 1;
+	ft_put_sprite(prm->img[img_i + prm->mobs->next_img], \
+		prm->playground, x, y);
+	if (++(prm->mobs->next_img) > 2)
+		prm->mobs->next_img = 0;
+}
+
 void	ft_move_mobs(t_param *prm)
 {
 	int		x;
 	int		y;
-	int		img_i;
 	t_mob	*begin;
 
 	begin = prm->mobs;
@@ -97,20 +101,10 @@ void	ft_move_mobs(t_param *prm)
 	{
 		if (prm->mobs->nb_move != 0)
 		{
-			if (prm->mobs->type == 'P' && prm->mobs->nb_move == NBMOVES)
-				prm->keyblock = 1;
 			ft_update_move_zone(prm, prm->mobs);
 			x = ft_get_pos(prm->mobs->x, prm->mobs->next_x, prm->mobs->nb_move);
 			y = ft_get_pos(prm->mobs->y, prm->mobs->next_y, prm->mobs->nb_move);
-			img_i = ft_strchr_index(AUTHORIZED, prm->mobs->type, 0);
-			if (img_i > 4)
-				img_i = (3 * img_i) + 2;
-			else
-				img_i += (3 * prm->mobs->move) + 1;	
-			ft_put_sprite(prm->img[img_i + prm->mobs->next_img], \
-				prm->playground, x, y);
-			if (++(prm->mobs->next_img) > 2)
-				prm->mobs->next_img = 0;
+			ft_put_next_sprite(prm, x, y);
 			if (--(prm->mobs->nb_move) == 0)
 			{
 				prm->mobs->x = prm->mobs->next_x;

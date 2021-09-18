@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 15:04:14 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:28:14 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_get_pos(int curr, int next, int n)
 	return (-1);
 }
 
-void	ft_update_map_array(t_mob *m, t_param *prm)
+void	ft_update_map_array(t_mob *m, t_param *prm, char next_tile)
 {
 	if (m->from_exit)
 		prm->map->map[m->y][m->x] = 'E';
@@ -98,5 +98,7 @@ void	ft_update_map_array(t_mob *m, t_param *prm)
 	}
 	if (m->type == 'P' && m->to_exit && prm->curr_items == prm->total_items)
 		prm->endgame = 1;
+	if (m->type == 'P' && next_tile != '1')
+		++(prm->curr_moves);
 	prm->map->map[m->next_y][m->next_x] = m->type;
 }

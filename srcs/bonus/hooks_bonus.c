@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 14:59:45 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/18 15:54:54 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ int	ft_handle_key(int key, void *param)
 		ft_free_mem(prm->map, prm, prm->mlx, 0);
 		exit(0);
 	}
-	/* */
-	int	col;
-	int	row;
-	if (key == 9) // V
-	{
-		row = -1;
-		while (++row < prm->map->rows)
-		{
-			col = -1;
-			while (++col < prm->map->cols)
-			{
-				printf("%c", prm->map->map[row][col]);
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-	/* */
 	if (key == W || key == S || key == A || key == D)
 	{
 		if (prm->keyblock == 0)
@@ -78,6 +60,14 @@ void	ft_unfreeze_player(t_param *prm)
 	prm->mobs = begin;
 }
 
+void	ft_register_ennemy_moves(t_param *prm)
+{
+	ft_register_move('U', prm, KEYMAP[W] - 48);
+	ft_register_move('L', prm, KEYMAP[A] - 48);
+	ft_register_move('D', prm, KEYMAP[S] - 48);
+	ft_register_move('R', prm, KEYMAP[D] - 48);
+}
+
 int	ft_render_next_frame(void *param)
 {
 	t_param	*prm;
@@ -87,7 +77,7 @@ int	ft_render_next_frame(void *param)
 		prm->frames = 0;
 	++(prm->frames);
 	ft_unfreeze_player(prm);
-	if (prm->frames % 3 == 0)
+	if (prm->frames % SPEED == 0)
 	{
 		ft_move_mobs(prm);
 		ft_register_ennemy_moves(prm);
