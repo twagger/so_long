@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 22:15:05 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 11:27:29 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 ** KEY BINDING
 */
 
-# ifdef PC
+# ifdef X11
 #  define K_QUIT 65307
 #  define K_UP 119
 #  define K_DOWN 115

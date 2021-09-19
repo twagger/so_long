@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:01:18 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 08:47:44 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 11:28:51 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ int	ft_handle_key(int key, void *param)
 				((t_param *)param)->mlx, 0);
 		}
 	}
-	ft_putstr_fd("Current move count : ", 1);
-	ft_putnbr_fd(((t_param *)param)->curr_moves, 1);
-	ft_putchar_fd('\n', 1);
 	return (0);
 }
 
