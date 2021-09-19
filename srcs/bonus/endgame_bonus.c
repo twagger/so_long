@@ -6,53 +6,74 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:40:11 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 15:36:25 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 11:18:57 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	ft_put_endmessage(t_param *prm, char *message)
+int	ft_put_endmessage(t_param *prm, char *message)
 {
+	char	*score;
+
+	score = ft_itoa(prm->curr_moves);
+	if (!score)
+		return (ERROR);
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 20, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2), TXT_COLOR, message);
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + TOP, TXT_COLOR, message);
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 60, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE, TXT_COLOR, \
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE + TOP, TXT_COLOR, \
 			"your score : ");
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE + 70, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE, TXT_COLOR, \
-			ft_itoa(prm->curr_moves - 1));
-	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 80, \
-		(prm->map->rows / 2) * SSIZE - \
-		(SSIZE / 2) + 2 * SSIZE, TXT_COLOR, "Press <ESC> to quit");
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE + TOP, TXT_COLOR, \
+			score);
+	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 80 \
+		+ LEFT, (prm->map->rows / 2) * SSIZE - \
+		(SSIZE / 2) + 2 * SSIZE + TOP, TXT_COLOR, "Press <ESC> to quit");
+	free(score);
+	return (0);
 }
 
-void	ft_put_small_endmessage(t_param *prm, char *message)
+int	ft_put_small_endmessage(t_param *prm, char *message)
 {
+	char	*score;
+
+	score = ft_itoa(prm->curr_moves);
+	if (!score)
+		return (ERROR);
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 20, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2), TXT_COLOR, message);
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + TOP, TXT_COLOR, message);
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 25, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE, TXT_COLOR, \
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE + TOP, TXT_COLOR, \
 			"score: ");
 	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE + 40, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE, TXT_COLOR, \
-			ft_itoa(prm->curr_moves - 1));
-	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 29, \
-		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + 2 * SSIZE, TXT_COLOR, \
-			">><ESC><<");
+		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) + SSIZE + TOP, TXT_COLOR, \
+			score);
+	mlx_string_put(prm->mlx, prm->win, (prm->map->cols / 2) * SSIZE - 29 \
+		+ LEFT, (prm->map->rows / 2) * SSIZE - (SSIZE / 2) + 2 * SSIZE + TOP, \
+			TXT_COLOR, ">><ESC><<");
+	free(score);
+	return (0);
 }
 
-int	ft_endgame(t_param *prm, char *message)
+int	ft_endgame(t_param *prm, int mess_num)
 {
 	prm->keyblock = 1;
+	prm->endgame = ENDSCREEN;
+	if (ft_update_infoscore(prm) == ERROR)
+		ft_free_mem(prm->map, prm, prm->mlx, ERROR);
 	if (ft_init_img(prm, &prm->infoend, prm->map->cols * SSIZE, 3 * SSIZE) \
 		== ERROR)
 		return (ERROR);
 	mlx_put_image_to_window(prm->mlx, prm->win, prm->infoend->img, 0, \
 		(prm->map->rows / 2) * SSIZE - (SSIZE / 2) - 4);
-	if (prm->map->cols < 8)
-		ft_put_small_endmessage(prm, message);
-	else
-		ft_put_endmessage(prm, message);
+	if (prm->map->cols < 8 && mess_num == 1)
+		return (ft_put_small_endmessage(prm, "You win !"));
+	if (prm->map->cols < 8 && mess_num == 2)
+		return (ft_put_small_endmessage(prm, "You lose !"));
+	if (prm->map->cols > 7 && mess_num == 1)
+		return (ft_put_endmessage(prm, "You win !"));
+	if (prm->map->cols > 7 && mess_num == 2)
+		return (ft_put_endmessage(prm, "You lose !"));
 	return (0);
 }

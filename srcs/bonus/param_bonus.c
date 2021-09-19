@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 00:03:35 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 08:49:31 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 		i = -1;
 		while (++i < NBSPRITES)
 			mlx_destroy_image(mlx, param->img[i]);
-		free(param->img);
 	}
+	free(param->img);
 	ft_free_frame(param->playground, param->mlx);
 	ft_free_frame(param->infoscore, param->mlx);
 	ft_free_frame(param->infoend, param->mlx);
@@ -73,19 +73,18 @@ int	ft_init_imgs(t_param *param, void *mlx)
 	int		h;
 	char	*path;
 
-	path = NULL;
 	param->img = (void **)malloc(sizeof(param->img) * NBSPRITES);
 	if (!param->img)
 		return (ERROR);
 	i = -1;
 	while (++i < NBSPRITES)
 	{
+		path = NULL;
 		path = ft_get_path(i);
 		if (!path)
 			return (ERROR);
 		param->img[i] = mlx_xpm_file_to_image(mlx, path, &w, &h);
 		free(path);
-		path = NULL;
 		if (!param->img[i])
 			return (ERROR);
 	}

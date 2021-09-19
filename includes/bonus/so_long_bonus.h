@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 00:02:24 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 11:18:14 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@
 # define NBSPRITES 29
 # define SSIZE 32
 # define TOP_GAP 25
+# define ENDSCREEN 3
 # ifdef HALLOWEEN
 #  define THEME "halloween"
 # else
 #  define THEME "default"
+# endif
+# ifdef LINUX
+#  define TOP 17
+#  define LEFT 20
+# else
+#  define TOP 2
+#  define LEFT 0
 # endif
 # define BG_COLOR 0x009C9C15
 # define TXT_COLOR 0x00FFFFFF
@@ -52,7 +60,7 @@
 ** KEY BINDING
 */
 
-# ifdef PC
+# ifdef X11
 #  define K_QUIT 65307
 #  define K_UP 119
 #  define K_DOWN 115
@@ -151,7 +159,7 @@ int		ft_free_map(t_map *map, int ret_code);
 int		ft_handle_close(void *param);
 int		ft_handle_key(int key, void *param);
 int		ft_render_next_frame(void *param);
-int		ft_endgame(t_param *prm, char *message);
+int		ft_endgame(t_param *prm, int mess_num);
 
 /*
 ** Images

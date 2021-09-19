@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/18 23:49:49 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/19 11:05:53 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,52 +97,54 @@ HEADERS		= includes/mandatory/
 ################################################################################
 CFLAGS		:= -Wall -Wextra -Werror
 LFTFLAGS	:= -L. -lft
-BFLAGS		:=
+ADDFLAGS	:=
 
 ifeq ($(OS), Linux)
-	LMLXFLAGS	:= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -DLINUX
+	LMLXFLAGS	:= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+	ADDFLAGS	:= -DLINUX -DX11
+	ifneq ($(SPEED),)
+		ADDFLAGS	+= -DSPEED=$(SPEED)
+	else
+		ADDFLAGS	+= -DSPEED=15
+	endif
 else
 	LMLXFLAGS	:= -lmlx -framework OpenGL -framework AppKit
+	ADDFLAGS	:= -DMAC
+	ifneq ($(SPEED),)
+		ADDFLAGS	+= -DSPEED=$(SPEED)
+	else
+		ADDFLAGS	+= -DSPEED=3
+	endif
 endif
 
 ifeq ($(DEBUG), true)
-	CFLAGS	+= -fsanitize=address -g3 -O0
+	ADDFLAGS	+= -fsanitize=address -g3 -O0
 endif
 
 ifeq ($(HALLOWEEN), true)
-	CFLAGS	+= -D HALLOWEEN=true
-endif
-
-ifneq ($(SPEED),)
-	CFLAGS	+= -D SPEED=$(SPEED)
-endif
-
-ifneq ($(KEYBOARD),)
-	CFLAGS	+= -D $(KEYBOARD)
+	ADDFLAGS	+= -DHALLOWEEN
 endif
 
 ################################################################################
 #                                    RULES                                     #
 ################################################################################
 .c.o:
-			@$(CC) $(CFLAGS) $(BFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) \
+			@$(CC) $(CFLAGS) $(ADDFLAGS) -c $< -o $(<:.c=.o) -I$(HEADERS) \
 				-I$(LFTDIR) -I$(LMLXDIR)
 
 $(NAME):	$(LMLX) $(LFT) $(OBJS)
 			@printf  "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME)]$(RESET)" 
-			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 all:		$(NAME)
 
 bonus:		HEADERS = includes/bonus/
-bonus:		BFLAGS = -DBONUS
+bonus:		ADDFLAGS += -DBONUS
 bonus:		$(LMLX) $(LFT) $(BOBJS)
 			@printf "$(BLUE)Creating $(RESET) $(YELLOW)[$(NAME) (bonus)]$(RESET)" 
 			@touch bonus
-			@$(CC) $(CFLAGS) $(BOBJS) -o $(NAME) \
-				-I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
+			@$(CC) $(CFLAGS) $(BOBJS) -o $(NAME) -I$(HEADERS) -I$(LFTDIR) -I$(LMLXDIR) $(LMLXFLAGS) $(LFTFLAGS)
 			@echo " : $(GREEN)OK !$(RESET)"
 
 clean:

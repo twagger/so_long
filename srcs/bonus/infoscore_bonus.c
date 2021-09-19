@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:56:53 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/13 15:35:30 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 10:23:40 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	ft_put_infomessage(t_param *prm)
 {
 	if (prm->map->cols > 5)
-		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Total moves : ");
+		mlx_string_put(prm->mlx, prm->win, 8, TOP, TXT_COLOR, "Total moves : ");
 	else
-		mlx_string_put(prm->mlx, prm->win, 8, 2, TXT_COLOR, "Tot : ");
+		mlx_string_put(prm->mlx, prm->win, 8, TOP, TXT_COLOR, "Tot : ");
 }
 
 int	ft_update_infoscore(t_param *prm)
 {
+	char	*mess;
+
 	if (!prm->infoscore)
 	{
 		if (ft_init_img(prm, &prm->infoscore, prm->map->cols * SSIZE, \
@@ -36,11 +38,13 @@ int	ft_update_infoscore(t_param *prm)
 	}
 	mlx_put_image_to_window(prm->mlx, prm->win, prm->infoscore->img, 0, 0);
 	ft_put_infomessage(prm);
+	mess = ft_itoa(prm->curr_moves);
+	if (!mess)
+		return (ERROR);
 	if (prm->map->cols > 5)
-		mlx_string_put(prm->mlx, prm->win, 145, 2, TXT_COLOR, \
-			ft_itoa(prm->curr_moves));
+		mlx_string_put(prm->mlx, prm->win, 145, TOP, TXT_COLOR, mess);
 	else
-		mlx_string_put(prm->mlx, prm->win, 65, 2, TXT_COLOR, \
-			ft_itoa(prm->curr_moves));
+		mlx_string_put(prm->mlx, prm->win, 65, TOP, TXT_COLOR, mess);
+	free(mess);
 	return (0);
 }
