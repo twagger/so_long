@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 21:43:48 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:09:41 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	ft_get_next_tile(int x, int y, int move, t_map *map)
 	return ('X');
 }
 
-int	ft_get_pos(int curr, int next, int n)
+int	ft_nx_pos(int curr, int next, int n)
 {
 	if (curr == next)
 		return (curr * SSIZE);

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 08:50:57 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:04:51 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
 		ft_free_map(map, 0);
 	if (param)
 		ft_free_param(param, mlx, 0);
+	else if (mlx)
+	{
+		mlx_destroy_display(mlx);
+		free(mlx);
+	}
 	if (ret_code == ERROR)
 		exit(ft_exit_w_message("Error", NULL, 2, 1));
 	exit(ret_code);

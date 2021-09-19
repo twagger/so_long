@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 11:29:22 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:16:04 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,7 @@ void	ft_do_move(t_sprite p, int move, t_param *param)
 	mlx_put_image_to_window(param->mlx, param->win, \
 		param->playground->img, 0, TOP_GAP);
 	++(param->curr_moves);
-	ft_putstr_fd("Current move count : ", 1);
-	ft_putnbr_fd(((t_param *)param)->curr_moves, 1);
-	ft_putchar_fd('\n', 1);
+	printf("Current move count : %i\n", ((t_param *)param)->curr_moves);
 }
 
 int	ft_mover(t_param *param, int move)

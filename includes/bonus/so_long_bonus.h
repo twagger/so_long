@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 11:18:14 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:09:54 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int		ft_clear_img(t_data *img, int width, int height);
 */
 
 t_mob	ft_get_player_pos(t_map *map);
-int		ft_get_pos(int curr, int next, int n);
+int		ft_nx_pos(int curr, int next, int n);
 char	ft_get_next_tile(int x, int y, int move, t_map *map);
 void	ft_get_next_position(t_mob *m, int move, char next_tile);
 void	ft_register_move(char type, t_param *prm, int move);

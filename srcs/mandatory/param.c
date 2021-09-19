@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:42:20 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 12:18:21 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 20:56:17 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	ft_free_param(t_param *param, void *mlx, int ret_code)
 	mlx_destroy_image(mlx, param->playground->img);
 	free(param->playground);
 	mlx_destroy_window(param->mlx, param->win);
-	mlx_destroy_display(param->mlx);
-	free(param->mlx);
+	mlx_destroy_display(mlx);
+	free(mlx);
 	free(param);
 	return (ret_code);
 }

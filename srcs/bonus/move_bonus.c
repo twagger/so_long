@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 15:45:51 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/18 21:03:14 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:10:08 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	ft_move_mobs(t_param *prm)
 		if (prm->mobs->nb_move != 0)
 		{
 			ft_update_move_zone(prm, prm->mobs);
-			x = ft_get_pos(prm->mobs->x, prm->mobs->next_x, prm->mobs->nb_move);
-			y = ft_get_pos(prm->mobs->y, prm->mobs->next_y, prm->mobs->nb_move);
+			x = ft_nx_pos(prm->mobs->x, prm->mobs->next_x, prm->mobs->nb_move);
+			y = ft_nx_pos(prm->mobs->y, prm->mobs->next_y, prm->mobs->nb_move);
 			ft_put_next_sprite(prm, x, y);
 			if (--(prm->mobs->nb_move) == 0)
 			{
