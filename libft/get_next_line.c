@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 14:29:23 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:03:13 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 22:00:45 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,17 @@ static int	ft_init_bufline(char **bufline)
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, int to_free)
 {
 	static char	*bufline = NULL;
 	int			result;
 
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
-		return (ERROR);
-	if (ft_init_bufline(&bufline) == ERROR)
+	if (to_free)
+	{
+		free(bufline);
+		return (0);
+	}
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || ft_init_bufline(&bufline) == -1)
 		return (ERROR);
 	result = ft_fill_buffer_until_n(&bufline, fd);
 	if (ft_return_line(line, &bufline, result) == ERROR)
@@ -109,13 +112,10 @@ int	get_next_line(int fd, char **line)
 		bufline = NULL;
 		return (ERROR);
 	}
-	else
-	{	
-		if (result == LAST_LINE)
-		{
-			free(bufline);
-			bufline = NULL;
-		}
-		return (result);
+	if (result == LAST_LINE)
+	{
+		free(bufline);
+		bufline = NULL;
 	}
+	return (result);
 }

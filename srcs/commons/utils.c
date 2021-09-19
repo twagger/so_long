@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 08:56:29 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 21:04:51 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:50:48 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ int	ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code)
 	return (ret_code);
 }
 
-int	ft_free_and_return(char **to_free, int to_return)
+int	ft_free_and_return(char *to_free, int to_return)
 {
 	if (to_free)
-		free(*to_free);
+	{
+		get_next_line(0, &to_free, 1);
+		free(to_free);
+	}
+	to_free = NULL;
 	if (to_return)
 		return (to_return);
 	return (-1);

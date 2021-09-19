@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 09:23:43 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/12 19:15:37 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:52:03 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	ft_create_map(int fd, t_map **map, int rows)
 	if (ft_init_map(*map, rows) == ERROR)
 		return (ERROR);
 	line = NULL;
-	ret = get_next_line(fd, &line);
+	ret = get_next_line(fd, &line, 0);
 	while (ret > 0)
 	{
 		ft_add_line(*map, line);
 		line = NULL;
-		ret = get_next_line(fd, &line);
+		ret = get_next_line(fd, &line, 0);
 	}
 	if (ret == ERROR)
 		return (ft_free_map(*map, ERROR));

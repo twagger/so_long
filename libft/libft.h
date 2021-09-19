@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 12:37:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/11 14:03:37 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:51:03 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int		get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line, int to_free);
 char	*ft_strcpy(char *dst, const char *src);
 void	*ft_realloc(void *ptr, size_t size);
 int		ft_strchr_index(const char *s, int c, int offset);

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 21:09:54 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 21:38:36 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_param
 ** Commons
 */
 
-int		ft_free_and_return(char **to_free, int to_return);
+int		ft_free_and_return(char *to_free, int to_return);
 int		ft_exit_w_message(char *message, char *message2, int fd, int code);
 int		ft_free_mem(t_map *map, t_param *param, void *mlx, int ret_code);
 int		ft_init_param(t_param **param, void *mlx, void *win, t_map *map);
