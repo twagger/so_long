@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 21:38:36 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 23:24:09 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,28 @@
 # endif
 # ifdef LINUX
 #  define TOP 17
-#  define LEFT 20
+#  define SC_LEFT 95
+#  define S_SC_LEFT 45
+#  define EN_LEFT1 20
+#  define EN_LEFT2 35
+#  define EN_LEFT3 45
+#  define EN_LEFT4 50
+#  define S_EN_LEFT1 10
+#  define S_EN_LEFT2 12
+#  define S_EN_LEFT3 29
+#  define S_EN_LEFT4 10
 # else
 #  define TOP 2
-#  define LEFT 0
+#  define SC_LEFT 145
+#  define S_SC_LEFT 65
+#  define EN_LEFT1 20
+#  define EN_LEFT2 60
+#  define EN_LEFT3 70
+#  define EN_LEFT4 80
+#  define S_EN_LEFT1 20
+#  define S_EN_LEFT2 25
+#  define S_EN_LEFT3 40
+#  define S_EN_LEFT4 29
 # endif
 # define BG_COLOR 0x009C9C15
 # define TXT_COLOR 0x00FFFFFF

@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:56:53 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 10:23:40 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/19 23:13:24 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	ft_update_infoscore(t_param *prm)
 	if (!mess)
 		return (ERROR);
 	if (prm->map->cols > 5)
-		mlx_string_put(prm->mlx, prm->win, 145, TOP, TXT_COLOR, mess);
+		mlx_string_put(prm->mlx, prm->win, SC_LEFT, TOP, TXT_COLOR, mess);
 	else
-		mlx_string_put(prm->mlx, prm->win, 65, TOP, TXT_COLOR, mess);
+		mlx_string_put(prm->mlx, prm->win, S_SC_LEFT, TOP, TXT_COLOR, mess);
 	free(mess);
 	return (0);
 }
