@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 10:47:55 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 21:51:33 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:11:04 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int	ft_map_controler(int fd, int *rows)
 	wall_chk = 1;
 	char_chk = 0;
 	ret = get_next_line(fd, &line, 0);
-	len = ft_strlen(line);
+	if (ret != ERROR)
+		len = ft_strlen(line);
 	while (ret > 0)
 	{
 		++(*rows);
