@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 14:42:35 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 22:59:27 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/20 10:25:41 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <errno.h>
 #include "so_long_bonus.h"
 
-int	ft_is_map_valid(char *map_file, int *rows)
+static int	ft_is_map_valid(char *map_file, int *rows)
 {
 	int	fd;
 
@@ -32,7 +32,7 @@ int	ft_is_map_valid(char *map_file, int *rows)
 	return (1);
 }
 
-int	ft_is_ber_file(char *map_file)
+static int	ft_is_ber_file(char *map_file)
 {
 	int	dot_pos;
 
@@ -50,7 +50,7 @@ int	ft_is_ber_file(char *map_file)
 	}
 }
 
-int	ft_file_to_array(char *map_file, t_map **map, int rows)
+static int	ft_file_to_array(char *map_file, t_map **map, int rows)
 {
 	int	fd;
 
@@ -66,7 +66,7 @@ int	ft_file_to_array(char *map_file, t_map **map, int rows)
 	return (1);
 }
 
-int	ft_game_loop(t_map *map)
+static int	ft_game_loop(t_map *map)
 {
 	void	*mlx;
 	void	*win;

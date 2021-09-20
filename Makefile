@@ -6,7 +6,7 @@
 #    By: twagner <twagner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 15:32:48 by twagner           #+#    #+#              #
-#    Updated: 2021/09/19 21:32:28 by twagner          ###   ########.fr        #
+#    Updated: 2021/09/20 10:24:45 by twagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,7 @@ ifeq ($(OS), Linux)
 	ifneq ($(SPEED),)
 		ADDFLAGS	+= -DSPEED=$(SPEED)
 	else
-		ADDFLAGS	+= -DSPEED=15
+		ADDFLAGS	+= -DSPEED=80
 	endif
 else
 	LMLXFLAGS	:= -lmlx -framework OpenGL -framework AppKit
