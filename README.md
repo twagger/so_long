@@ -1,4 +1,4 @@
-# Welcome to so long 👋
+# Welcome to so long 🐼
 
 This project is about creating a mini game using MinilibX.
 MinilibX, a simple X-Window (X11R6) programming API in C, designed for 42 students, suitable for X-beginners.
@@ -51,7 +51,7 @@ make bonus
 ./so_long maps/patrol3.ber
 ```
  The improvements are :
-* The little panda is now animated
+* The little panda is animated
 * You can have some enemies patroling in some maps
 * Your current score is displayed on the game window
 
@@ -86,3 +86,8 @@ make bonus HALLOWEEN=true
 👤 **Thomas WAGNER**
 
 * Github: [@twagger](https://github.com/twagger/)
+
+## Game resources
+
+* Visual assets (bushes, ground, pots, ...) : https://cainos.itch.io/pixel-art-top-down-basic
+* Panda and enemies : https://pipoya.itch.io/pipoya-free-rpg-character-sprites-32x32
