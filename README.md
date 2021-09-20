@@ -3,7 +3,7 @@
 This project is about creating a mini game using [MinilibX](https://github.com/42Paris/minilibx-linux).
 MinilibX is a simple X-Window (X11R6) programming API in C, designed for 42 students, suitable for X-beginners.
 
-Using the library, the objective of this project is to learn how to create a game board, drawing sprintes, handling events to move and animate the sprites, and managing the game parameters all along the session.
+Using the library, the objective of this project is to learn how to create a game board, drawing sprites, handling events to move and animate the sprites, and managing the game parameters all along the session.
 
 ## Installation
 
