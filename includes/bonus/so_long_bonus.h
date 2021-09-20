@@ -6,7 +6,7 @@
 /*   By: twagner <twagner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:12:12 by twagner           #+#    #+#             */
-/*   Updated: 2021/09/19 23:24:09 by twagner          ###   ########.fr       */
+/*   Updated: 2021/09/20 09:10:39 by twagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define SO_LONG_BONUS_H
 # ifdef LINUX
 #  include "mlx.h"
+#  define DESTROYMLX 1
 # else
 #  include <mlx.h>
+#  define DESTROYMLX 0
 # endif
 # include "libft.h"
 # define ERROR -1
@@ -85,7 +87,7 @@
 #  define K_LEFT 97
 #  define K_RIGHT 100
 # else
-#  define K_QUIT 65307
+#  define K_QUIT 53
 #  define K_UP 13
 #  define K_DOWN 1
 #  define K_LEFT 0
