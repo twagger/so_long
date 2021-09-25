@@ -100,7 +100,7 @@ LFTFLAGS	:= -L. -lft
 ADDFLAGS	:=
 
 ifeq ($(OS), Linux)
-	LMLXFLAGS	:= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+	LMLXFLAGS	:= -L. -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
 	ADDFLAGS	:= -DLINUX -DX11
 	ifneq ($(SPEED),)
 		ADDFLAGS	+= -DSPEED=$(SPEED)
